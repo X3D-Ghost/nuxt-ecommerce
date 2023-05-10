@@ -34,7 +34,7 @@
           <tbody class="align-middle">
             <tr>
               <td class="align-middle">
-                <img src="img/product-1.jpg" alt="" style="width: 50px" />
+                <img src="/img/product-1.jpg" alt="" style="width: 50px" />
                 Product Name
               </td>
               <td class="align-middle">$150</td>
@@ -66,7 +66,7 @@
             </tr>
             <tr>
               <td class="align-middle">
-                <img src="img/product-2.jpg" alt="" style="width: 50px" />
+                <img src="/img/product-2.jpg" alt="" style="width: 50px" />
                 Product Name
               </td>
               <td class="align-middle">$150</td>
@@ -98,7 +98,7 @@
             </tr>
             <tr>
               <td class="align-middle">
-                <img src="img/product-3.jpg" alt="" style="width: 50px" />
+                <img src="/img/product-3.jpg" alt="" style="width: 50px" />
                 Product Name
               </td>
               <td class="align-middle">$150</td>
@@ -130,7 +130,7 @@
             </tr>
             <tr>
               <td class="align-middle">
-                <img src="img/product-4.jpg" alt="" style="width: 50px" />
+                <img src="/img/product-4.jpg" alt="" style="width: 50px" />
                 Product Name
               </td>
               <td class="align-middle">$150</td>
@@ -162,7 +162,7 @@
             </tr>
             <tr>
               <td class="align-middle">
-                <img src="img/product-5.jpg" alt="" style="width: 50px" />
+                <img src="/img/product-5.jpg" alt="" style="width: 50px" />
                 Product Name
               </td>
               <td class="align-middle">$150</td>

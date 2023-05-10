@@ -2,7 +2,7 @@
 const { data } = await useAsyncData("/categories", () =>
   queryContent("/categories").findOne()
 );
-const items = data.value?.body;
+const items = data.value.body;
 </script>
 
 <template>
