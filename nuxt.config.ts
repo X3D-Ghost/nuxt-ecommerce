@@ -6,7 +6,36 @@ export default defineNuxtConfig({
     // "bootstrap-icons/",
     "@/assets/scss/style.scss",
   ],
-
+  components: {
+    dirs: [
+      {
+        path: "~/components/Global",
+        global: true,
+        pathPrefix: false,
+      },
+      {
+        path: "~/components",
+        pathPrefix: true,
+      },
+    ],
+  },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/scss/variables.scss" as *;',
+        },
+      },
+      devSourcemap: true,
+    },
+  },
+  // components: [
+  //   {
+  //     global: true,
+  //     dirs: ["~/components"],
+  //     pathPrefix: false,
+  //   },
+  // ],
   modules: [
     [
       "@nuxtjs/eslint-module",

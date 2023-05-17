@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import MainHero from "~/components/Main/MainHero.vue";
-import MainFeatured from "~/components/Main/MainFeatured.vue";
-import MainCategories from "~/components/Main/MainCategories.vue";
-import ProductsGrid from "~/components/Products/ProductsGrid.vue";
-import VendorList from "~/components/Common/VendorList.vue";
+definePageMeta({
+  layout: "home",
+});
 </script>
 
 <template>
@@ -16,11 +14,19 @@ import VendorList from "~/components/Common/VendorList.vue";
   <!-- Featured End -->
 
   <!-- Categories Start -->
-  <MainCategories />
+  <BaseSection title="Каты">
+    <template #title>Категории</template>
+    <MainCategories />
+  </BaseSection>
   <!-- Categories End -->
 
   <!-- Products Start -->
-  <ProductsGrid />
+  <div class="container-fluid pt-5 pb-3">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+      <span class="bg-secondary pe-3">Featured Products</span>
+    </h2>
+    <CatalogList />
+  </div>
   <!-- Products End -->
 
   <!-- Offer Start -->
@@ -51,7 +57,7 @@ import VendorList from "~/components/Common/VendorList.vue";
   <!-- Offer End -->
 
   <!-- Vendor Start -->
-  <VendorList />
+  <CommonVendorList />
   <!-- Vendor End -->
 </template>
 

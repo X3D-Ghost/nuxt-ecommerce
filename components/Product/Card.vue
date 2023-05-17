@@ -20,9 +20,9 @@
       </div>
     </div>
     <div class="text-center py-4">
-      <a class="h6 text-decoration-none text-truncate" href="">
+      <nuxt-link class="h6 text-decoration-none text-truncate" to="/product/1">
         Product Name Goes Here
-      </a>
+      </nuxt-link>
       <div class="d-flex align-items-center justify-content-center mt-2">
         <h5>$123.00</h5>
         <h6 class="text-muted ms-2"><del>$123.00</del></h6>

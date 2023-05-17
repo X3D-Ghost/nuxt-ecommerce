@@ -31,7 +31,7 @@ const colorMode = useColorMode();
               <button class="dropdown-item" type="button">Регистрация</button>
             </div>
           </div>
-          <div class="btn-group mx-2">
+          <!--          <div class="btn-group mx-2">
             <button
               type="button"
               class="btn btn-sm btn-light dropdown-toggle"
@@ -45,7 +45,7 @@ const colorMode = useColorMode();
               <button class="dropdown-item" type="button">GBP</button>
               <button class="dropdown-item" type="button">CAD</button>
             </div>
-          </div>
+          </div>-->
           <div class="btn-group">
             <button
               type="button"
@@ -63,7 +63,7 @@ const colorMode = useColorMode();
         </div>
         <div class="d-inline-flex align-items-center d-block d-lg-none">
           <a href="" class="btn px-0 ms-2">
-            <i class="fas fa-heart text-dark"></i>
+            <Icon icon="fa-solid fa-heart" class="text-dark" />
             <span
               class="badge text-dark border border-dark rounded-circle"
               style="padding-bottom: 2px"
@@ -71,7 +71,7 @@ const colorMode = useColorMode();
             >
           </a>
           <a href="" class="btn px-0 ms-2">
-            <i class="fas fa-shopping-cart text-dark"></i>
+            <Icon icon="fa-solid fa-shopping-cart" class="text-dark" />
             <span
               class="badge text-dark border border-dark rounded-circle"
               style="padding-bottom: 2px"
@@ -82,7 +82,7 @@ const colorMode = useColorMode();
       </div>
     </div>
     <div
-      :class="[`bg-#{$colorMode.value}`]"
+      :class="[`bg-${colorMode}`]"
       class="row align-items-center py-3 px-xl-5 d-none d-lg-flex"
     >
       <div class="col-lg-4">
@@ -100,13 +100,17 @@ const colorMode = useColorMode();
               type="search"
               class="form-control"
               placeholder="Поиск продукции"
-              aria-label="Search"
+              aria-label="Поиск"
             />
-            <div class="input-group-append">
-              <span class="input-group-text bg-transparent text-primary">
-                <i class="fa fa-search"></i>
-              </span>
-            </div>
+            <!--            <div class="input-group-append">-->
+            <!--            <span class="input-group-text bg-transparent text-primary">
+              &lt;!&ndash;                <i class="fa fa-search"></i>&ndash;&gt;
+              <Icon icon="fa-soli fa-search" />
+            </span>-->
+            <!--            </div>-->
+            <button class="btn">
+              <Icon icon="fa-soli fa-search" />
+            </button>
           </div>
         </form>
       </div>
@@ -123,15 +127,15 @@ const colorMode = useColorMode();
     <div class="row px-xl-5">
       <div class="col-lg-3 d-none d-lg-block position-relative">
         <a
-          class="btn d-flex align-items-center justify-content-between bg-primary w-100"
+          class="btn d-flex align-items-center justify-content-between bg-primary w-100 px-4"
           data-bs-toggle="collapse"
           href="#navbar-vertical"
-          style="height: 65px; padding: 0 30px"
+          style="height: 65px"
         >
           <h6 class="text-dark m-0">
-            <i class="fa fa-bars me-2"></i>Категории
+            <Icon icon="fa-solid fa-bars" class="me-2" />Каталог товаров
           </h6>
-          <i class="fa fa-angle-down text-dark"></i>
+          <Icon icon="fa-solid fa-angle-down" class="text-dark" />
         </a>
         <nav
           class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
@@ -189,13 +193,22 @@ const colorMode = useColorMode();
             id="navbarCollapse"
           >
             <div class="navbar-nav me-auto py-0">
-              <nuxt-link href="/" class="nav-item nav-link active"
+              <nuxt-link
+                href="/"
+                class="nav-item nav-link"
+                active-class="active"
                 >Главная</nuxt-link
               >
-              <nuxt-link href="/shop" class="nav-item nav-link"
+              <nuxt-link
+                href="/shop"
+                class="nav-item nav-link"
+                active-class="active"
                 >Магазин</nuxt-link
               >
-              <nuxt-link href="/detail" class="nav-item nav-link"
+              <nuxt-link
+                href="/detail"
+                class="nav-item nav-link"
+                active-class="active"
                 >Товар</nuxt-link
               >
               <div class="nav-item dropdown">
@@ -203,35 +216,45 @@ const colorMode = useColorMode();
                   href="#"
                   class="nav-link dropdown-toggle"
                   data-bs-toggle="dropdown"
-                  >Pages <i class="fa fa-angle-down mt-1"></i
-                ></a>
+                >
+                  Страницы
+                  <!--                  <i class="fa fa-angle-down mt-1"></i>-->
+                  <Icon icon="fa-solid fa-angle-down" class="my-1" />
+                </a>
                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                  <nuxt-link href="/cart" class="dropdown-item"
+                  <nuxt-link
+                    href="/cart"
+                    class="dropdown-item"
+                    active-class="active"
                     >Корзина</nuxt-link
                   >
-                  <nuxt-link href="/checkout" class="dropdown-item"
+                  <nuxt-link
+                    href="/checkout"
+                    class="dropdown-item"
+                    active-class="active"
                     >Оформление</nuxt-link
                   >
                 </div>
               </div>
-              <nuxt-link href="/contact" class="nav-item nav-link"
+              <nuxt-link
+                href="/contact"
+                class="nav-item nav-link"
+                active-class="active"
                 >Связь с нами</nuxt-link
               >
             </div>
             <div class="navbar-nav ms-auto py-0 d-none d-lg-block">
               <a href="" class="btn px-0">
-                <i class="fas fa-heart text-primary"></i>
+                <Icon icon="fa-solid fa-heart" class="text-primary" />
                 <span
                   class="badge text-secondary border border-secondary rounded-circle"
-                  style="padding-bottom: 2px"
                   >0</span
                 >
               </a>
               <a href="" class="btn px-0 ms-3">
-                <i class="fas fa-shopping-cart text-primary"></i>
+                <Icon icon="fa-solid fa-shopping-cart" class="text-primary" />
                 <span
                   class="badge text-secondary border border-secondary rounded-circle"
-                  style="padding-bottom: 2px"
                   >0</span
                 >
               </a>
@@ -243,5 +266,3 @@ const colorMode = useColorMode();
   </div>
   <!-- Navbar End -->
 </template>
-
-<style scoped></style>

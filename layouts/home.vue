@@ -3,11 +3,6 @@
   <keep-alive>
     <BaseHeader />
   </keep-alive>
-  <!-- Breadcrumb Start -->
-  <div class="container-fluid px-5">
-    <Breadcrumbs />
-  </div>
-  <!-- Breadcrumb End -->
   <slot />
   <keep-alive> <BaseFooter /></keep-alive>
   <!-- Back to Top -->
