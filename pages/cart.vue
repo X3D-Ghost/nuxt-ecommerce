@@ -20,7 +20,11 @@
           <tbody class="align-middle">
             <tr>
               <td class="align-middle">
-                <img src="/img/product-1.jpg" alt="" style="width: 50px" />
+                <img
+                  src="/img/product/product-1_1.jpg"
+                  alt=""
+                  style="width: 50px"
+                />
                 Product Name
               </td>
               <td class="align-middle">$150</td>

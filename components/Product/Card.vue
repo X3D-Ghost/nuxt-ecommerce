@@ -3,7 +3,7 @@
 <template>
   <div class="card product-item">
     <div class="product-img position-relative overflow-hidden">
-      <img class="img-fluid w-100" src="/img/product-1.jpg" alt="" />
+      <img class="img-fluid w-100" src="/img/product/product-1_1.jpg" alt="" />
       <div class="product-action">
         <a class="btn btn-outline-dark btn-square" href="">
           <Icon icon="fa-solid fa-shopping-cart" />
