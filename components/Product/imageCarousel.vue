@@ -9,7 +9,7 @@ const currentSlide = ref(0);
 
 <template>
   <div class="grid image-carousel__wrapper">
-    <div class="g-col-2 image-carousel__thumbs">
+    <div class="g-col-12 g-col-md-2 image-carousel__thumbs">
       <div class="grid image-carousel__thumb-track">
         <div
           v-for="(image, i) in images"
@@ -30,59 +30,36 @@ const currentSlide = ref(0);
       :autoplay="2000"
       :wrap-around="true"
       v-model="currentSlide"
-      class="g-col-10 image-carousel"
+      class="g-col-12 g-col-md-10 image-carousel"
     >
       <Slide v-for="image in images" :key="image.src">
         <div class="carousel__item image-carousel__item">
           <img class="w-100 h-100" :src="`/img/${image.src}`" alt="Image" />
         </div>
       </Slide>
-
-      <!--      <template #addons>
-        <Pagination />
-      </template>-->
     </Carousel>
-
-    <!--    <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner bg-light">
-        <div
-          v-for="(image, i) in images"
-          class="carousel-item"
-          :class="i === 0 && 'active'"
-        >
-          <img class="w-100 h-100" :src="`/img/${image.src}`" alt="Image" />
-        </div>
-      </div>
-      <button
-        class="carousel-control-prev"
-        href="#product-carousel"
-        data-slide="prev"
-      >
-        <Icon icon="fa-solid fa-angle-left" class="text-dark" size="2x" />
-      </button>
-      <button
-        class="carousel-control-next"
-        href="#product-carousel"
-        data-slide="next"
-      >
-        <Icon icon="fa-solid fa-angle-right" class="text-dark" size="2x" />
-      </button>
-    </div>-->
   </div>
 </template>
 
 <style lang="scss">
+@import "bootstrap/scss/mixins";
 .image-carousel {
   &__wrapper {
     display: grid;
   }
   &__thumbs {
-    //display: flex;
-    //flex-direction: column;
+    overflow-x: scroll;
+    @include media-breakpoint-down(md) {
+      grid-row: 2;
+    }
   }
   &__thumb-track {
-    //display: flex;
-    --bs-columns: 1;
+    @include media-breakpoint-up(md) {
+      --bs-columns: 1;
+    }
+    @include media-breakpoint-down(md) {
+      grid-auto-columns: 100px;
+    }
   }
   &__thumb {
     width: 100px;

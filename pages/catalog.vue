@@ -1,11 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <!-- Cart Start -->
-  <div class="container">
-    <CartLIst />
+  <div class="container-fluid">
+    <div class="grid px-xl-5"></div>
   </div>
-  <!-- Cart End -->
 </template>
 
 <style scoped></style>

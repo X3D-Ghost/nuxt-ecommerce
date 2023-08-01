@@ -45,6 +45,15 @@ export default defineNuxtConfig({
     ],
     "@nuxt/content",
     "@nuxtjs/color-mode",
+    "@pinia/nuxt",
+  ],
+  buildModules: [
+    [
+      "@nuxtjs/localforage",
+      {
+        /* module options */
+      },
+    ],
   ],
   eslint: {
     // ignorePatterns: ["temp.js", "/template_src"],

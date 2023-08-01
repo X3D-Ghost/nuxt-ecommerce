@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const productData = {
-  title: "Ткань",
+  title: "Жаккардовая ткань 2852 ЦВЕТ КРАСНЫЙ ПОЛОСКА",
   price: 450,
   images: [
     { src: "product/product-1_1.jpg" },
@@ -62,96 +62,108 @@ const productData = {
 const count = ref(1);
 const currentSize = ref(productData.sizes[0].value);
 const currentColor = ref(productData.colors[0].value);
+const currentTab = ref(1);
 </script>
 
 <template>
   <!-- Shop Detail Start -->
   <div class="container-fluid pb-5">
-    <div class="row px-xl-5">
-      <div class="col-lg-5 mb-30">
+    <div class="grid px-xl-5">
+      <div class="g-col-12 g-col-md-6 mb-30">
         <ProductImageCarousel :images="productData.images" />
       </div>
-
-      <div class="col-lg-7 h-auto mb-30">
-        <div class="h-100 bg-light p-30">
-          <h3>{{ productData.title }}</h3>
-          <h3 class="fw-semi-bold mb-4">{{ productData.price }}</h3>
-          <p class="mb-4">
-            {{ productData.description_short }}
-          </p>
-          <div class="d-flex mb-3">
-            <strong class="text-dark me-3">Размер:</strong>
-            <template v-for="(size, i) in productData.sizes" :key="size.value">
-              <InputRadio
-                v-model="currentSize"
-                :value="size.value"
-                :id="`${size.value}-${i}`"
-                name="size"
-              >
-                {{ size.title }}
-              </InputRadio>
-            </template>
+      <div class="g-col-12 g-col-md-6 h-auto mb-30">
+        <div class="card h-100 bg-light">
+          <div class="card-header">
+            <h1>{{ productData.title }}</h1>
+            <h3 class="fw-semi-bold mb-4">{{ productData.price }} ₽</h3>
           </div>
-          <div class="d-flex mb-4">
-            <strong class="text-dark me-3">Цвет:</strong>
-            <template
-              v-for="(color, i) in productData.colors"
-              :key="color.value"
-            >
-              <InputRadio
-                v-model="currentColor"
-                :value="color.value"
-                :id="`${color.value}-${i}`"
-                name="size"
+          <div class="card-body">
+            <p class="mb-4">
+              {{ productData.description_short }}
+            </p>
+            <div class="d-flex mb-3">
+              <strong class="text-dark me-3">Размер:</strong>
+              <template
+                v-for="(size, i) in productData.sizes"
+                :key="size.value"
               >
-                <span :style="{ backgroundColor: color.value }">
+                <InputRadio
+                  v-model="currentSize"
+                  :value="size.value"
+                  :id="`${size.value}-${i}`"
+                  name="size"
+                >
+                  {{ size.title }}
+                </InputRadio>
+              </template>
+            </div>
+            <div class="d-flex mb-4">
+              <strong class="text-dark me-3">Цвет:</strong>
+              <template
+                v-for="(color, i) in productData.colors"
+                :key="color.value"
+              >
+                <InputRadio
+                  v-model="currentColor"
+                  :value="color.value"
+                  :id="`${color.value}-${i}`"
+                  name="size"
+                >
+                  <span :style="{ backgroundColor: color.value }">
+                    {{ color.title || color.value }}
+                  </span>
+                </InputRadio>
+              </template>
+              <div class="btn-group">
+                <a
+                  href="/"
+                  class="btn"
+                  v-for="(color, i) in productData.colors"
+                  :key="color.value"
+                  :style="{ backgroundColor: color.value }"
+                >
                   {{ color.title || color.value }}
-                </span>
-              </InputRadio>
-            </template>
-          </div>
-          <div class="d-flex align-items-center mb-4 pt-2">
-            <div class="input-group quantity me-3" style="width: 130px">
-              <div class="input-group-btn">
-                <button class="btn btn-primary btn-minus">
-                  <Icon icon="fa-solid fa-minus"></Icon>
-                </button>
-              </div>
-              <input
-                type="text"
-                class="form-control bg-secondary border-0 text-center"
-                :value="count"
-              />
-              <div class="input-group-btn">
-                <button class="btn btn-primary btn-plus">
-                  <Icon icon="fa-solid fa-plus"></Icon>
-                </button>
+                </a>
               </div>
             </div>
-            <button class="btn btn-primary px-3">
-              <Icon icon="fa-solid fa-shopping-cart me-1"></Icon>
-              В корзину
-            </button>
+            <div class="d-flex align-items-center mb-4 mt-auto pt-2">
+              <!--          <div class="mb-4 pt-2">-->
+              <InputCounter :value="1" />
+              <!--              <div class="btn-group">-->
+              <button class="btn btn-primary px-3 me-3">
+                <Icon icon="fa-solid fa-plus me-1"></Icon>
+                В корзину
+                <Icon icon="fa-solid fa-shopping-cart ms-1"></Icon>
+              </button>
+              <button class="btn btn-outline-primary px-3">
+                <Icon icon="fa-regular fa-heart"></Icon>
+              </button>
+              <!--              </div>-->
+            </div>
+            <small>Минимальный заказ 1 м.</small>
           </div>
-          <div class="d-flex pt-2">
-            <strong class="text-dark me-2">Поделиться:</strong>
-            <div class="d-inline-flex">
-              <a class="text-dark px-2" href="">
-                <Icon
-                  icon="fa-brands fa-facebook"
-                  class="text-dark"
-                  size="2x"
-                />
-              </a>
-              <a class="text-dark px-2" href="">
-                <Icon icon="fa-brands fa-twitter" size="2x"></Icon>
-              </a>
-              <a class="text-dark px-2" href="">
-                <Icon icon="fa-brands fa-linkedin-in" size="2x"></Icon>
-              </a>
-              <a class="text-dark px-2" href="">
-                <Icon icon="fa-brands fa-pinterest" size="2x"></Icon>
-              </a>
+          <div class="card-footer">
+            <div class="d-flex pt-2">
+              <strong class="text-dark me-2">Поделиться:</strong>
+              <div class="d-inline-flex">
+                <a class="text-dark px-2" href="">
+                  <Icon
+                    icon="fa-brands fa-facebook"
+                    class="text-dark"
+                    size="2x"
+                  />
+                </a>
+                <a class="text-dark px-2" href="">
+                  <Icon icon="fa-brands fa-twitter" size="2x"></Icon>
+                </a>
+                <a class="text-dark px-2" href="">
+                  <Icon icon="fa-brands fa-linkedin-in" size="2x"></Icon>
+                </a>
+                <a class="text-dark px-2" href="">
+                  <Icon icon="fa-brands fa-pinterest" size="2x"></Icon>
+                </a>
+              </div>
             </div>
           </div>
         </div>

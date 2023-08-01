@@ -1,0 +1,276 @@
+{
+  "value": [
+    {
+      "id": 1,
+      "title": "Тряпка",
+      "price": 200,
+      "images": [
+        { "src": "product/product-1_1.jpg" },
+        { "src": "product/product-1_2.jpg" },
+        { "src": "product/product-1_3.jpg" },
+        { "src": "product/product-1_4.jpg" }
+      ],
+      "sizes": [
+        { "title": "140 см", "value": 140 },
+        { "title": "100 см", "value": 100 },
+        { "title": "200 см", "value": 200 }
+      ],
+      "attributes": [
+        {
+          "label": "Ширина, см",
+          "value": 130
+        },
+        {
+          "label": "Бренд",
+          "value": "Брэд"
+        },
+        {
+          "label": "Страна-изготовитель",
+          "value": "Китай"
+        },
+        {
+          "label": "Материал",
+          "value": "Микровелюр"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Шкура",
+      "price": 300,
+      "images": [
+        { "src": "product/product-1_1.jpg" },
+        { "src": "product/product-1_2.jpg" },
+        { "src": "product/product-1_3.jpg" },
+        { "src": "product/product-1_4.jpg" }
+      ],
+      "sizes": [
+        { "title": "140 см", "value": 140 },
+        { "title": "100 см", "value": 100 },
+        { "title": "200 см", "value": 200 }
+      ],
+      "attributes": [
+        {
+          "label": "Ширина, см",
+          "value": 130
+        },
+        {
+          "label": "Бренд",
+          "value": "Брэд"
+        },
+        {
+          "label": "Страна-изготовитель",
+          "value": "Китай"
+        },
+        {
+          "label": "Материал",
+          "value": "Микровелюр"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Шерсть",
+      "price": 450,
+      "images": [
+        { "src": "product/product-1_1.jpg" },
+        { "src": "product/product-1_2.jpg" },
+        { "src": "product/product-1_3.jpg" },
+        { "src": "product/product-1_4.jpg" }
+      ],
+      "sizes": [
+        { "title": "140 см", "value": 140 },
+        { "title": "100 см", "value": 100 },
+        { "title": "200 см", "value": 200 }
+      ],
+      "attributes": [
+        {
+          "label": "Ширина, см",
+          "value": 130
+        },
+        {
+          "label": "Бренд",
+          "value": "Брэд"
+        },
+        {
+          "label": "Страна-изготовитель",
+          "value": "Китай"
+        },
+        {
+          "label": "Материал",
+          "value": "Микровелюр"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Вельвет",
+      "price": 200,
+      "images": [
+        { "src": "product/product-1_1.jpg" },
+        { "src": "product/product-1_2.jpg" },
+        { "src": "product/product-1_3.jpg" },
+        { "src": "product/product-1_4.jpg" }
+      ],
+      "sizes": [
+        { "title": "140 см", "value": 140 },
+        { "title": "100 см", "value": 100 },
+        { "title": "200 см", "value": 200 }
+      ],
+      "attributes": [
+        {
+          "label": "Ширина, см",
+          "value": 130
+        },
+        {
+          "label": "Бренд",
+          "value": "Брэд"
+        },
+        {
+          "label": "Страна-изготовитель",
+          "value": "Китай"
+        },
+        {
+          "label": "Материал",
+          "value": "Микровелюр"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Деним",
+      "price": 150,
+      "images": [
+        { "src": "product/product-1_1.jpg" },
+        { "src": "product/product-1_2.jpg" },
+        { "src": "product/product-1_3.jpg" },
+        { "src": "product/product-1_4.jpg" }
+      ],
+      "sizes": [
+        { "title": "140 см", "value": 140 },
+        { "title": "100 см", "value": 100 },
+        { "title": "200 см", "value": 200 }
+      ],
+      "attributes": [
+        {
+          "label": "Ширина, см",
+          "value": 130
+        },
+        {
+          "label": "Бренд",
+          "value": "Брэд"
+        },
+        {
+          "label": "Страна-изготовитель",
+          "value": "Китай"
+        },
+        {
+          "label": "Материал",
+          "value": "Микровелюр"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Лён",
+      "price": 340,
+      "images": [
+        { "src": "product/product-1_1.jpg" },
+        { "src": "product/product-1_2.jpg" },
+        { "src": "product/product-1_3.jpg" },
+        { "src": "product/product-1_4.jpg" }
+      ],
+      "sizes": [
+        { "title": "140 см", "value": 140 },
+        { "title": "100 см", "value": 100 },
+        { "title": "200 см", "value": 200 }
+      ],
+      "attributes": [
+        {
+          "label": "Ширина, см",
+          "value": 130
+        },
+        {
+          "label": "Бренд",
+          "value": "Брэд"
+        },
+        {
+          "label": "Страна-изготовитель",
+          "value": "Китай"
+        },
+        {
+          "label": "Материал",
+          "value": "Микровелюр"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Хлопок",
+      "price": 240,
+      "images": [
+        { "src": "product/product-1_1.jpg" },
+        { "src": "product/product-1_2.jpg" },
+        { "src": "product/product-1_3.jpg" },
+        { "src": "product/product-1_4.jpg" }
+      ],
+      "sizes": [
+        { "title": "140 см", "value": 140 },
+        { "title": "100 см", "value": 100 },
+        { "title": "200 см", "value": 200 }
+      ],
+      "attributes": [
+        {
+          "label": "Ширина, см",
+          "value": 130
+        },
+        {
+          "label": "Бренд",
+          "value": "Брэд"
+        },
+        {
+          "label": "Страна-изготовитель",
+          "value": "Китай"
+        },
+        {
+          "label": "Материал",
+          "value": "Микровелюр"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Твид",
+      "price": 180,
+      "images": [
+        { "src": "product/product-1_1.jpg" },
+        { "src": "product/product-1_2.jpg" },
+        { "src": "product/product-1_3.jpg" },
+        { "src": "product/product-1_4.jpg" }
+      ],
+      "sizes": [
+        { "title": "140 см", "value": 140 },
+        { "title": "100 см", "value": 100 },
+        { "title": "200 см", "value": 200 }
+      ],
+      "attributes": [
+        {
+          "label": "Ширина, см",
+          "value": 130
+        },
+        {
+          "label": "Бренд",
+          "value": "Брэд"
+        },
+        {
+          "label": "Страна-изготовитель",
+          "value": "Китай"
+        },
+        {
+          "label": "Материал",
+          "value": "Микровелюр"
+        }
+      ]
+    }
+  ]
+}
