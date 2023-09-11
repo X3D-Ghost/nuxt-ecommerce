@@ -1,4 +1,31 @@
 <script setup lang="ts">
+const route = useRoute();
+const slug = ref("");
+if (route.params.slug) {
+  let lastIndex = route.params.slug.length - 1;
+
+  if (!route.params.slug[lastIndex]) {
+    slug.value = route.params.slug[lastIndex - 1];
+  } else {
+    slug.value = route.params.slug[lastIndex];
+  }
+} else {
+  slug.value = "home";
+}
+
+const { data, pending, error, refresh } = await useFetch(
+  `http://wootest.dev/wp-json/wc/v3/products`,
+  {
+    query: {
+      slug: encodeURIComponent(slug.value),
+    },
+  }
+);
+const product = data.value[0];
+/*const attributes = await useFetch(
+  `http://wootest.dev/wp-json/wc/v3/products/attributes/${product.id}`
+);
+product.attributes = attributes;*/
 const productData = {
   title: "Жаккардовая ткань 2852 ЦВЕТ КРАСНЫЙ ПОЛОСКА",
   price: 450,
@@ -60,29 +87,38 @@ const productData = {
 };
 
 const count = ref(1);
-const currentSize = ref(productData.sizes[0].value);
-const currentColor = ref(productData.colors[0].value);
+// const currentSize = ref(productData.sizes[0].value);
+// const currentColor = ref(productData.colors[0].value);
 const currentTab = ref(1);
 </script>
 
 <template>
   <!-- Shop Detail Start -->
+  <p v-if="error && error.data">
+    {{ error.data }}
+  </p>
+  <!--  <p v-else-if="data">
+    {{ data[0] }}
+  </p>-->
   <div class="container-fluid pb-5">
     <div class="grid px-xl-5">
       <div class="g-col-12 g-col-md-6 mb-30">
-        <ProductImageCarousel :images="productData.images" />
+        <ProductImageCarousel
+          v-if="product && product.images"
+          :images="product.images"
+        />
       </div>
       <div class="g-col-12 g-col-md-6 h-auto mb-30">
         <div class="card h-100 bg-light">
           <div class="card-header">
-            <h1>{{ productData.title }}</h1>
-            <h3 class="fw-semi-bold mb-4">{{ productData.price }} ₽</h3>
+            <h1>{{ product.name }}</h1>
+            <h3 class="fw-semi-bold mb-4">{{ product.price }} ₽</h3>
           </div>
           <div class="card-body">
             <p class="mb-4">
-              {{ productData.description_short }}
+              {{ product.short_description }}
             </p>
-            <div class="d-flex mb-3">
+            <!--            <div class="d-flex mb-3">
               <strong class="text-dark me-3">Размер:</strong>
               <template
                 v-for="(size, i) in productData.sizes"
@@ -97,8 +133,8 @@ const currentTab = ref(1);
                   {{ size.title }}
                 </InputRadio>
               </template>
-            </div>
-            <div class="d-flex mb-4">
+            </div>-->
+            <!--            <div class="d-flex mb-4">
               <strong class="text-dark me-3">Цвет:</strong>
               <template
                 v-for="(color, i) in productData.colors"
@@ -126,7 +162,7 @@ const currentTab = ref(1);
                   {{ color.title || color.value }}
                 </a>
               </div>
-            </div>
+            </div>-->
             <div class="d-flex align-items-center mb-4 mt-auto pt-2">
               <!--          <div class="mb-4 pt-2">-->
               <InputCounter :value="1" />
@@ -188,15 +224,13 @@ const currentTab = ref(1);
           <TabsContent>
             <TabPanel id="tab-description">
               <h4 class="mb-3">Описание</h4>
-              <p>
-                {{ productData.description }}
-              </p>
+              <div v-html="product.description"></div>
             </TabPanel>
             <TabPanel id="tab-attributes">
               <h4 class="mb-3">Характеристики</h4>
               <div class="col-md-6">
-                <dl v-for="item in productData.attributes">
-                  <dt>{{ item.label }}</dt>
+                <dl v-for="item in product.attributes">
+                  <dt>{{ item.name }}</dt>
                   <dd>{{ item.value }}</dd>
                 </dl>
               </div>

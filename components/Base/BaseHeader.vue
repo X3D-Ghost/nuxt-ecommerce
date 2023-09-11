@@ -206,6 +206,12 @@ const colorMode = useColorMode();
                 >Магазин</nuxt-link
               >
               <nuxt-link
+                to="/catalog"
+                class="nav-item nav-link"
+                active-class="active"
+                >Каталог</nuxt-link
+              >
+              <nuxt-link
                 href="/product/1"
                 class="nav-item nav-link"
                 active-class="active"

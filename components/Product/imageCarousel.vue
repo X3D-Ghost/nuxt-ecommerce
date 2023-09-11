@@ -20,7 +20,7 @@ const currentSlide = ref(0);
         >
           <img
             class="image-carousel__thumb-image"
-            :src="`/img/${image.src}`"
+            :src="image.src"
             alt="Image"
           />
         </div>
@@ -32,11 +32,15 @@ const currentSlide = ref(0);
       v-model="currentSlide"
       class="g-col-12 g-col-md-10 image-carousel"
     >
-      <Slide v-for="image in images" :key="image.src">
+      <slide v-for="image in images" :key="image.src">
         <div class="carousel__item image-carousel__item">
-          <img class="w-100 h-100" :src="`/img/${image.src}`" alt="Image" />
+          <img class="w-100 h-100" :src="image.src" alt="Image" />
         </div>
-      </Slide>
+      </slide>
+      <template #addons>
+        <CarouselPagination />
+        <Carouselnavigation />
+      </template>
     </Carousel>
   </div>
 </template>

@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  console.log({ to, from });
+  /*  console.log({ to, from });
   if (to.params.id === "1") {
     return abortNavigation();
   }
@@ -8,5 +8,5 @@ export default defineNuxtRouteMiddleware((to, from) => {
   // might get an infinite redirect loop
   if (to.path !== "/") {
     return navigateTo("/");
-  }
+  }*/
 });

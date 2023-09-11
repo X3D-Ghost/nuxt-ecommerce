@@ -43,9 +43,11 @@ export default defineNuxtConfig({
         // options
       },
     ],
-    "@nuxt/content",
-    "@nuxtjs/color-mode",
-    "@pinia/nuxt",
+    // "@nuxt/content",
+    // "@nuxtjs/color-mode",
+    // "@pinia/nuxt",
+    // "nuxt-lodash",
+    // "@pinia-plugin-persistedstate/nuxt",
   ],
   buildModules: [
     [
@@ -60,6 +62,10 @@ export default defineNuxtConfig({
   },
   devtools: {
     enabled: false,
+
+    timeline: {
+      enabled: true,
+    },
   },
   colorMode: {
     preference: "system", // default value of $colorMode.preference
@@ -70,5 +76,9 @@ export default defineNuxtConfig({
     classPrefix: "",
     classSuffix: "-mode",
     storageKey: "nuxt-color-mode",
+  },
+  experimental: {
+    headNext: true,
+    viewTransition: true,
   },
 });
