@@ -1,6 +1,20 @@
-# Content v2 Minimal Starter
+# Nuxt ecommerce template
 
-Look at the [Content documentation](https://content-v2.nuxtjs.org/) to learn more.
+Made for using with [nuxt layers](https://nuxt.com/docs/getting-started/layers)
+
+## Create new project
+
+https://nuxt.com/docs/getting-started/installation
+
+Add into nuxt.config.ts:
+
+````
+export default defineNuxtConfig({
+  extends: [
+    'github:X3D-Ghost/nuxt-ecommerce', // Extend from a git repository
+  ]
+})
+````
 
 ## Setup
 
@@ -16,6 +30,16 @@ npm install
 # pnpm
 pnpm install
 ```
+
+Copy .env.example to .env
+
+Set environment variables
+
+```
+NUXT_BACKEND_URL='your_backend_url'
+NUXT_BACKEND_API_URL='your_backend_rest_api_url'
+```
+
 
 ## Development Server
 
