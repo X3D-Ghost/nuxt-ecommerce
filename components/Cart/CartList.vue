@@ -11,8 +11,6 @@ const { increment, items, changeQuantity, removeProduct } = store;
 
 const shippingCost = ref(500);
 const totalSum = computed(() => shippingCost.value + getTotalPrice.value);
-
-import { storeToRefs } from "pinia";
 </script>
 
 <template>
