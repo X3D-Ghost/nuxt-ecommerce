@@ -1,5 +1,3 @@
-import { defineStore } from "pinia";
-
 export const useCartStore = defineStore("cart", () => {
   const count = ref(0);
   const name = ref("Eduardo");

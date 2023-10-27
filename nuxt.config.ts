@@ -70,14 +70,6 @@ export default defineNuxtConfig({
     // "nuxt-lodash",
     // "@pinia-plugin-persistedstate/nuxt",
   ],
-  buildModules: [
-    [
-      "@nuxtjs/localforage",
-      {
-        /* module options */
-      },
-    ],
-  ],
   eslint: {
     // ignorePatterns: ["temp.js", "/template_src"],
   },
