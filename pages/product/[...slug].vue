@@ -1,123 +1,54 @@
 <script setup lang="ts">
 const route = useRoute();
-const slug = ref("");
-if (route.params.slug) {
-  let lastIndex = route.params.slug.length - 1;
+const product = await useProduct();
+const productData = product.data.value[0];
+const variant = await useProductVariants(productData.id);
+const variants = ref(null);
+const variableAttributes = ref(variant.attributes);
 
-  if (!route.params.slug[lastIndex]) {
-    slug.value = route.params.slug[lastIndex - 1];
-  } else {
-    slug.value = route.params.slug[lastIndex];
-  }
-} else {
-  slug.value = "home";
-}
-
-const { data, pending, error, refresh } = await useFetch(
-  `http://wootest.dev/wp-json/wc/v3/products`,
-  {
-    query: {
-      slug: encodeURIComponent(slug.value),
-    },
-  }
-);
-const product = data.value[0];
-/*const attributes = await useFetch(
-  `http://wootest.dev/wp-json/wc/v3/products/attributes/${product.id}`
-);
-product.attributes = attributes;*/
-const productData = {
-  title: "Жаккардовая ткань 2852 ЦВЕТ КРАСНЫЙ ПОЛОСКА",
-  price: 450,
-  images: [
-    { src: "product/product-1_1.jpg" },
-    { src: "product/product-1_2.jpg" },
-    { src: "product/product-1_3.jpg" },
-    { src: "product/product-1_4.jpg" },
-  ],
-  sizes: [
-    { title: "140 см", value: 140 },
-    { title: "100 см", value: 100 },
-    { title: "200 см", value: 200 },
-  ],
-  colors: [
-    { value: "white" },
-    { value: "blue" },
-    { value: "beige" },
-    { value: "red" },
-  ],
-  description_short: `
-  Жаккардовая ткань является одной из самых красивых и востребованных
-            тканей для пошива постельного белья. Она мягкая, приятная на ощупь,
-            прочная, устойчива к стиркам. В состав ткани входит только
-            натуральный хлопок. Благодаря этому постельное белье из жаккарда
-            дышит, пропускает воздух, обеспечивает комфортный сон. Жаккард имеет
-            сложный рисунок, который получается в процессе плетения.
-  `,
-  description: `
- Ткань в рулонах — нетканое переплетение волокон, которые образуют плотный и прочный материал.
-Рулоны ткани — это рулон материала, который имеет стандартную ширину, определенную в соответствии с требованиями заказчика, но обычно это ширина около 6 футов.
-Для производства ткани в рулоне используются природные материалы и синтетические материалы.
-Большинство натуральных тканей, используемых для производства рулона, производятся из растительных материалов, таких как хлопок, лен, шерсть и шелк.
-Ткань в рулонах для пошива одежды
-Рулон ткани может использоваться в различных целях.
-Он может быть использован для создания одежды, ковров, штор и т. Д. Ткань в рулоне обычно бывает шириной около 6 футов и имеет длину около 150 футов.
-Если у вас есть заказ на ткань в рулоне, вы можете выбрать рулоны шириной 3 фута или 4 фута.
-В рулоне могут быть использованы только натуральные волокна.
-Это обычно изготавливается из шелка, хлопка, шерсти, льна и других материалов.
-`,
-  attributes: [
-    {
-      label: "Ширина, см",
-      value: 130,
-    },
-    {
-      label: "Бренд",
-      value: "Брэд",
-    },
-    {
-      label: "Страна-изготовитель",
-      value: "Китай",
-    },
-    {
-      label: "Материал",
-      value: "Микровелюр",
-    },
-  ],
-};
-
+console.debug(variants.value);
 const count = ref(1);
-// const currentSize = ref(productData.sizes[0].value);
-// const currentColor = ref(productData.colors[0].value);
 const currentTab = ref(1);
+
+const breadcrumbItems = [
+  { text: "Главная", href: "/" },
+  { text: "Каталог", href: "/catalog" },
+];
 </script>
 
 <template>
   <!-- Shop Detail Start -->
-  <p v-if="error && error.data">
+  <!--  <p v-if="error && error.data">
     {{ error.data }}
-  </p>
+  </p>-->
   <!--  <p v-else-if="data">
     {{ data[0] }}
   </p>-->
-  <div class="container-fluid pb-5">
+  <div class="container">
+    <Breadcrumbs :items="breadcrumbItems" />
+    <PageTitle> {{ productData.name }} </PageTitle>
+    <PageTitle :title="productData.name" />
+  </div>
+  <div class="container pb-5">
     <div class="grid px-xl-5">
       <div class="g-col-12 g-col-md-6 mb-30">
         <ProductImageCarousel
-          v-if="product && product.images"
-          :images="product.images"
+          v-if="productData && productData.images"
+          :images="productData.images"
         />
       </div>
       <div class="g-col-12 g-col-md-6 h-auto mb-30">
         <div class="card h-100 bg-light">
-          <div class="card-header">
-            <h1>{{ product.name }}</h1>
-            <h3 class="fw-semi-bold mb-4">{{ product.price }} ₽</h3>
-          </div>
           <div class="card-body">
-            <p class="mb-4">
-              {{ product.short_description }}
-            </p>
+            <ProductPrice
+              :price="productData.price"
+              :oldPrice="productData.oldPrice"
+              :discount="productData.discount"
+            />
+            <ProductVariants :items="variableAttributes"></ProductVariants>
+            <!--            <p class="mb-4">
+              {{ productData.short_description }}
+            </p>-->
             <!--            <div class="d-flex mb-3">
               <strong class="text-dark me-3">Размер:</strong>
               <template
@@ -168,43 +99,30 @@ const currentTab = ref(1);
               <InputCounter :value="1" />
               <!--              <div class="btn-group">-->
               <button class="btn btn-primary px-3 me-3">
-                <Icon icon="fa-solid fa-plus me-1"></Icon>
+                <!--                <Icon
+                  name="fa-solid fa-plus"
+                  icon="fa-solid fa-plus me-1"
+                ></Icon>-->
                 В корзину
-                <Icon icon="fa-solid fa-shopping-cart ms-1"></Icon>
+                <!--                <Icon icon="fa-solid fa-shopping-cart ms-1"></Icon>-->
               </button>
               <button class="btn btn-outline-primary px-3">
-                <Icon icon="fa-regular fa-heart"></Icon>
+                <!--                <Icon icon="fa-regular fa-heart"></Icon>-->
               </button>
               <!--              </div>-->
             </div>
+            <ProductQuickBuy />
             <small>Минимальный заказ 1 м.</small>
           </div>
           <div class="card-footer">
-            <div class="d-flex pt-2">
-              <strong class="text-dark me-2">Поделиться:</strong>
-              <div class="d-inline-flex">
-                <a class="text-dark px-2" href="">
-                  <Icon
-                    icon="fa-brands fa-facebook"
-                    class="text-dark"
-                    size="2x"
-                  />
-                </a>
-                <a class="text-dark px-2" href="">
-                  <Icon icon="fa-brands fa-twitter" size="2x"></Icon>
-                </a>
-                <a class="text-dark px-2" href="">
-                  <Icon icon="fa-brands fa-linkedin-in" size="2x"></Icon>
-                </a>
-                <a class="text-dark px-2" href="">
-                  <Icon icon="fa-brands fa-pinterest" size="2x"></Icon>
-                </a>
-              </div>
-            </div>
+            <ProductShare />
           </div>
         </div>
       </div>
     </div>
+    <section>
+      <ProductAttributes :items="productData.attributes" />
+    </section>
     <div class="row px-xl-5">
       <div class="col">
         <Tabs class="bg-light p-30">
@@ -222,19 +140,13 @@ const currentTab = ref(1);
             <Tab label="Отзывы" id="tab-desc" data-bs-target="#tab-reviews" />
           </div>
           <TabsContent>
-            <TabPanel id="tab-description">
+            <!--            <TabPanel id="tab-description">
               <h4 class="mb-3">Описание</h4>
-              <div v-html="product.description"></div>
-            </TabPanel>
-            <TabPanel id="tab-attributes">
-              <h4 class="mb-3">Характеристики</h4>
-              <div class="col-md-6">
-                <dl v-for="item in product.attributes">
-                  <dt>{{ item.name }}</dt>
-                  <dd>{{ item.value }}</dd>
-                </dl>
-              </div>
-            </TabPanel>
+              <div v-html="productData.description"></div>
+            </TabPanel>-->
+            <!--            <TabPanel id="tab-attributes">
+              <ProductAttributes :items="productData.attributes" />
+            </TabPanel>-->
             <TabPanel id="tab-reviews">
               <div class="row">
                 <div class="col-md-6">
@@ -251,11 +163,11 @@ const currentTab = ref(1);
                         John Doe<small> - <i>01 Jan 2045</i></small>
                       </h6>
                       <div class="text-primary mb-2">
-                        <Icon icon="fa-solid fa-star"></Icon>
+                        <!--                        <Icon icon="fa-solid fa-star"></Icon>
                         <Icon icon="fa-solid fa-star"></Icon>
                         <Icon icon="fa-solid fa-star"></Icon>
                         <Icon icon="fa-solid fa-star-half-alt"></Icon>
-                        <Icon icon="fa-regular fa-star"></Icon>
+                        <Icon icon="fa-regular fa-star"></Icon>-->
                       </div>
                       <p>
                         Diam amet duo labore stet elitr ea clita ipsum, tempor
@@ -274,11 +186,11 @@ const currentTab = ref(1);
                   <div class="d-flex my-3">
                     <p class="mb-0 me-2">Your Rating * :</p>
                     <div class="text-primary">
+                      <!--                      <Icon icon="fa-regular fa-star"></Icon>
                       <Icon icon="fa-regular fa-star"></Icon>
                       <Icon icon="fa-regular fa-star"></Icon>
                       <Icon icon="fa-regular fa-star"></Icon>
-                      <Icon icon="fa-regular fa-star"></Icon>
-                      <Icon icon="fa-regular fa-star"></Icon>
+                      <Icon icon="fa-regular fa-star"></Icon>-->
                     </div>
                   </div>
                   <form>

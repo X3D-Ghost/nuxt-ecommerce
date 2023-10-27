@@ -10,7 +10,7 @@ const items = data.value.body;*/
 </script>
 
 <template>
-  <div v-for="item in items" class="g-col-lg-2 g-col-md-4 g-col-6">
+  <div v-for="item in items">
     <a class="text-decoration-none" :href="`catalog/${item.slug}`">
       <div class="cat-item d-flex align-items-center">
         <div class="overflow-hidden" style="width: 100px; height: 100px">

@@ -1,6 +1,9 @@
 <script setup lang="ts">
+const runtimeConfig = useRuntimeConfig();
+const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
+
 const categories = await useFetch(
-  `http://wootest.dev/wp-json/wc/v3/products/categories`,
+  `${BACKEND_API_URL}/wc/v3/products/categories`,
   {
     query: {
       // slug: slug.value,
@@ -16,7 +19,10 @@ const categories = await useFetch(
 <template>
   <div class="container-fluid">
     <div class="grid">
-      <CatalogCategories :items="categories.data.value" />
+      <CatalogCategories
+        :items="categories.data.value"
+        class="g-col-lg-2 g-col-md-4 g-col-6"
+      />
     </div>
   </div>
 </template>

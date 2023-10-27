@@ -30,7 +30,7 @@ const dec = () => {
   <div class="input-group quantity me-3" style="width: 130px">
     <div class="input-group-btn">
       <button class="btn btn-primary btn-minus" @click="dec">
-        <Icon icon="fa-solid fa-minus"></Icon>
+        <!--        <Icon icon="fa-solid fa-minus"></Icon>-->
       </button>
     </div>
     <input
@@ -40,7 +40,7 @@ const dec = () => {
     />
     <div class="input-group-btn">
       <button class="btn btn-primary btn-plus" @click="inc">
-        <Icon icon="fa-solid fa-plus"></Icon>
+        <!--        <Icon icon="fa-solid fa-plus"></Icon>-->
       </button>
     </div>
   </div>

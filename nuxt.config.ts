@@ -1,20 +1,38 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const currentDir = dirname(fileURLToPath(import.meta.url));
+
 export default defineNuxtConfig({
+  runtimeConfig: {
+    // The private keys which are only available within server-side
+    backendUrl: "/",
+    backendApiUrl: "/api",
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      BACKEND_URL: process.env.NUXT_BACKEND_URL,
+      BACKEND_API_URL: process.env.NUXT_BACKEND_API_URL,
+      API_ENDPOINT: process.env.NUXT_API_ENDPOINT,
+    },
+  },
   css: [
-    "animate.css",
-    "@fortawesome/fontawesome-svg-core/styles.css",
+    // "animate.css",
+    // "@fortawesome/fontawesome-svg-core/styles.css",
     // "bootstrap-icons/",
-    "@/assets/scss/style.scss",
+    // "@/assets/scss/style.scss",
+    // join(currentDir, "./assets/scss/style.scss"),
   ],
   components: {
     dirs: [
       {
-        path: "~/components/Global",
+        path: join(currentDir, "./components/Global"),
         global: true,
         pathPrefix: false,
       },
       {
-        path: "~/components",
+        path: join(currentDir, "./components"),
         pathPrefix: true,
       },
     ],
@@ -23,7 +41,10 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/scss/variables.scss" as *;',
+          additionalData: `@use "${join(
+            currentDir,
+            "./assets/scss/variables.scss"
+          )}" as *;`,
         },
       },
       devSourcemap: true,
@@ -61,11 +82,11 @@ export default defineNuxtConfig({
     // ignorePatterns: ["temp.js", "/template_src"],
   },
   devtools: {
-    enabled: false,
+    enabled: true,
 
-    timeline: {
+    /*timeline: {
       enabled: true,
-    },
+    },*/
   },
   colorMode: {
     preference: "system", // default value of $colorMode.preference

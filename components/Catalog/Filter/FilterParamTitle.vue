@@ -1,11 +1,14 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h5 class="section-title position-relative text-uppercase mb-3">
-    <span class="bg-secondary pe-3">
+  <div class="filter-title mb-3">
+    <p class="section-title">
       <slot></slot>
-    </span>
-  </h5>
+    </p>
+  </div>
 </template>
 
-<style scoped></style>
+<style lang="scss">
+.filter-title {
+}
+</style>

@@ -7,13 +7,20 @@ const props = defineProps({
 </script>
 
 <template>
-  <li>
-    <nuxt-link :to="slug">{{ name }}</nuxt-link>
-    <slot></slot>
-    <ul>
-      <CategoresItem v-for="child in children" v-bind="child"></CategoresItem>
-    </ul>
-  </li>
+  <div>
+    <nuxt-link :to="slug">
+      <slot v-bind="{ name, slug }">
+        <p>
+          {{ name }}
+        </p>
+      </slot>
+    </nuxt-link>
+    <slot name="children" v-bind="children">
+      <ul>
+        <CategoresItem v-for="child in children" v-bind="child"></CategoresItem>
+      </ul>
+    </slot>
+  </div>
 </template>
 
 <style scoped></style>

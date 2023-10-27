@@ -1,5 +1,6 @@
 <script setup>
-const colorMode = useColorMode();
+// const colorMode = useColorMode();
+const colorMode = null;
 </script>
 
 <template>

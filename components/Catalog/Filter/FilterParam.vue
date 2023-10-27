@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, defineEmits } from "vue";
+import FilterParamBody from "~/components/Catalog/Filter/FilterParamBody.vue";
 
 const props = defineProps({
   name: String,
@@ -16,6 +17,11 @@ const props = defineProps({
     default: null,
   },
   modelValue: { type: [Array, Boolean] },
+  noTitle: Boolean,
+  itemComponent: {
+    type: [Object, String],
+    default: "div",
+  },
 });
 const emit = defineEmits(["update:modelValue", "change"]);
 function valueChange(name, value) {
@@ -38,6 +44,8 @@ const totalCount = computed(() =>
 );
 
 const selectedValues = ref([]);
+// Object.assign(selectedValues, props.value);
+selectedValues.value.push(...props.value);
 
 const model = computed({
   get() {
@@ -59,52 +67,43 @@ function filterChange(e) {
 </script>
 
 <template>
-  <CatalogFilterParamTitle> {{ name }} </CatalogFilterParamTitle>
-  <div class="bg-light p-4 mb-30">
-    <!--    <div
-      class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
-    >
-      <input
-        type="checkbox"
-        class="custom-control-input"
-        :checked="value"
-        id="price-all"
-        @change="selectAll"
-      />
-      <label class="custom-control-label" for="price-all">Все</label>
-      &lt;!&ndash;      <span class="badge border fw-normal">{{ totalCount }}</span>&ndash;&gt;
-    </div>-->
-    <InputCheckbox
-      label="Все"
-      v-model="selectedValues"
-      :id="`${name}-all`"
-      :checked="selectedValues.length === values.length"
-      @change="selectAll"
-    ></InputCheckbox>
-    <div
-      v-for="filterValue in values"
-      class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
-    >
-      <!--      <input
-        type="checkbox"
-        class="custom-control-input"
-        id="price-1"
-        :checked="filterValue === value"
-        @change="valueChange(filterValue.name, filterValue.value)"
-      />
-      <label class="custom-control-label" for="price-1">{{
-        filterValue.name
-      }}</label>-->
-      <InputCheckbox
-        :label="filterValue.name"
-        v-model="selectedValues"
-        :value="filterValue.value"
-        :id="`${name}-${filterValue.value}`"
-        @change="filterChange"
-      ></InputCheckbox>
-      <!--      <span class="badge border fw-normal">{{ filterValue.count }}</span>-->
-    </div>
-  </div>
+  <component :is="itemComponent" class="filter__param" :title="name">
+    <slot v-bind="{ filterChange, values, name }">
+      <slot v-if="!noTitle" name="header" :title="name">
+        <CatalogFilterParamTitle> {{ name }} </CatalogFilterParamTitle>
+      </slot>
+      <FilterParamBody>
+        <!--        <InputCheckbox
+          label="Все"
+          v-model="selectedValues"
+          :id="`${name}-all`"
+          :checked="selectedValues.length === values.length"
+          @change="selectAll"
+        ></InputCheckbox>-->
+        <template v-for="filterValue in values" :key="filterValue.value">
+          <slot
+            name="body"
+            v-bind="{ filterValue, filterChange, selectedValues, name }"
+          >
+            <div
+              class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
+            >
+              <InputCheckbox
+                :text="filterValue.name"
+                v-model="selectedValues"
+                :value="filterValue.value"
+                :id="`${name}-${filterValue.value}`"
+                @change="filterChange"
+              ></InputCheckbox>
+            </div>
+          </slot>
+        </template>
+      </FilterParamBody>
+    </slot>
+  </component>
 </template>
 
-<style scoped></style>
+<style scoped>
+.filter__param {
+}
+</style>

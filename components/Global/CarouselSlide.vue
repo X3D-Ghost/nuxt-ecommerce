@@ -1,0 +1,7 @@
+<script setup lang="ts"></script>
+
+<template>
+  <div class="carousel-slide"><slot></slot></div>
+</template>
+
+<style scoped></style>

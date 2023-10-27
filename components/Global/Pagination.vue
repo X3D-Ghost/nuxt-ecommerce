@@ -9,13 +9,14 @@ const props = defineProps({
     default: 0,
   },
 });
-const pages = computed(() => {
+/*const pages = computed(() => {
   const arr = [];
   for (let i = 0; i < props.count; i++) {
     arr[i] = i + 1;
   }
   return arr;
-});
+});*/
+const pages = Array(props.count);
 const { query } = useRoute();
 const router = useRoute();
 
@@ -41,7 +42,7 @@ const nextPage = computed(() => props.current + 1);
         </nuxt-link>
       </li>
       <li
-        v-for="page in pages"
+        v-for="page in count"
         :key="`pagination-link-${page}`"
         :class="['page-item', page === current ? 'active' : '']"
       >

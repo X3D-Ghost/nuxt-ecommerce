@@ -3,7 +3,7 @@ import { computed, defineEmits } from "vue";
 const props = defineProps({
   modelValue: { type: [Array, Boolean] },
   value: { type: [Boolean, Object] },
-  label: { type: String },
+  text: { type: String },
   id: {
     type: String,
   },
@@ -32,7 +32,7 @@ const model = computed({
     />
     <slot name="label">
       <label class="form-check-label" :for="id">
-        {{ label }}
+        {{ text }}
       </label>
     </slot>
     <slot name="after"></slot>
