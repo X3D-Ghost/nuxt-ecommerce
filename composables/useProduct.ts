@@ -5,8 +5,8 @@ export const useProduct = async () => {
   const route = useRoute();
   const slug = ref("");
   const variants = ref(null);
-  console.log({ runtimeConfig });
-  console.log({ BACKEND_API_URL });
+  // console.log({ runtimeConfig });
+  // console.log({ BACKEND_API_URL });
   if (route.params.slug) {
     let lastIndex = route.params.slug.length - 1;
 
@@ -25,11 +25,22 @@ export const useProduct = async () => {
       query: {
         slug: encodeURIComponent(slug.value),
       },
+      onResponse({ response }) {
+        console.debug({ response });
+      },
+      onRequest(context: FetchContext): Promise<void> | void {
+        console.debug({ context });
+      },
+      onRequestError(
+        context: FetchContext & { error: Error }
+      ): Promise<void> | void {
+        console.debug(context);
+      },
     }
   );
 
   function get() {}
-  function getVariants() {
+  /*function getVariants() {
     useFetch(
       `${BACKEND_API_URL}/wc/v3/products/${data.value[0].id}/variations`,
       {
@@ -42,7 +53,7 @@ export const useProduct = async () => {
         },
       }
     );
-  }
+  }*/
 
-  return { get, getVariants, data, pending, error, variants };
+  return { get, /*getVariants,*/ data, pending, error, variants };
 };

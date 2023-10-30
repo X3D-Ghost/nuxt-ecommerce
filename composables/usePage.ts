@@ -23,5 +23,10 @@ export const usePage = async () => {
       },
     }
   );
-  return { slug, pageData: data.value[0], pending, error };
+  return {
+    slug,
+    pageData: data.value && data.value[0] ? data.value[0] : null,
+    pending,
+    error,
+  };
 };
