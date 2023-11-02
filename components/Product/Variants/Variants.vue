@@ -11,6 +11,9 @@ const props = defineProps({
     <template v-for="item in items" :key="`variant-${item.id}`">
       <slot name="group" v-bind="item">
         <ProductVariantsGroup v-bind="item">
+          <template #label="{ label }">
+            <slot name="label" :label="label"></slot>
+          </template>
           <template #item="slotProps">
             <slot name="item" v-bind="slotProps"></slot>
           </template>

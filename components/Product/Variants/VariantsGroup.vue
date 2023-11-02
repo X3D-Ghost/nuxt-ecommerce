@@ -9,7 +9,9 @@ console.log({ props });
 
 <template>
   <div class="variants-group">
-    <p>{{ text }}</p>
+    <slot name="label" :label="text">
+      <p>{{ text }}</p>
+    </slot>
     <div class="variants__list">
       <template v-for="option in options">
         <slot name="item" v-bind="{ value: option, text, id }">
@@ -20,10 +22,10 @@ console.log({ props });
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
 .variants-group {
-  display: flex;
-  flex-wrap: wrap;
+  //display: flex;
+  //flex-wrap: wrap;
 }
 .variants__list {
   display: inline-flex;

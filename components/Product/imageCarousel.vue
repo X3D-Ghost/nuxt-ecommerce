@@ -4,6 +4,10 @@ const props = defineProps({
   images: {
     type: Array,
   },
+  showThumbs: {
+    type: Boolean,
+    default: true,
+  },
 });
 const currentSlide = ref(0);
 
@@ -18,7 +22,7 @@ const carousel = ref(null);
 
 <template>
   <div class="grid image-carousel__wrapper gap-0">
-    <div class="g-col-12 g-col-md-2 image-carousel__thumbs">
+    <div v-if="showThumbs" class="g-col-12 g-col-md-2 image-carousel__thumbs">
       <!--      <div class="grid image-carousel__thumb-track">
         <div
           v-for="(image, i) in images"
