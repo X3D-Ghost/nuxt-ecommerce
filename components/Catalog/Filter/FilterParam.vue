@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, defineEmits } from "vue";
-import FilterParamBody from "~/components/Catalog/Filter/FilterParamBody.vue";
 
 const props = defineProps({
   name: String,
@@ -21,6 +20,10 @@ const props = defineProps({
   itemComponent: {
     type: [Object, String],
     default: "div",
+  },
+  openClass: {
+    type: String,
+    default: "open",
   },
 });
 const emit = defineEmits(["update:modelValue", "change"]);
@@ -64,15 +67,28 @@ function filterChange(e) {
   };
   emit("change", filerParam);
 }
+
+const isOpen = ref(true);
+function showToggle() {
+  isOpen.value = !isOpen.value;
+}
 </script>
 
 <template>
   <component :is="itemComponent" class="filter__param" :title="name">
     <slot v-bind="{ filterChange, values, name }">
-      <slot v-if="!noTitle" name="header" :title="name">
-        <CatalogFilterParamTitle> {{ name }} </CatalogFilterParamTitle>
+      <slot
+        v-if="!noTitle"
+        name="header"
+        :title="name"
+        :showToggle="showToggle"
+        :isOpen="isOpen"
+      >
+        <CatalogFilterParamTitle @click="showToggle" v-bind="isOpen">
+          {{ name }}
+        </CatalogFilterParamTitle>
       </slot>
-      <FilterParamBody>
+      <CatalogFilterParamBody :class="{ [openClass]: isOpen }">
         <!--        <InputCheckbox
           label="Все"
           v-model="selectedValues"
@@ -98,7 +114,7 @@ function filterChange(e) {
             </div>
           </slot>
         </template>
-      </FilterParamBody>
+      </CatalogFilterParamBody>
     </slot>
   </component>
 </template>

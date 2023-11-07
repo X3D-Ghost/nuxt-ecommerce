@@ -16,7 +16,14 @@ const props = defineProps({
   listComponentProps: {
     type: Array,
   },
+  itemComponentProps: {
+    type: Array,
+  },
   itemNoTitle: Boolean,
+  openParamClass: {
+    type: String,
+    default: "open",
+  },
 });
 const emits = defineEmits(["change", "update"]);
 console.log(props.params);
@@ -39,20 +46,32 @@ function filterChange(param) {
   <div class="filter">
     <slot name="before" :filters="filters" :filterChange="filterChange"></slot>
     <component :is="listComponent" v-bind="listComponentProps">
-      <template v-for="filter in filters">
-        <slot v-bind="{ filter, filterChange }" @change="filterChange">
-          <CatalogFilterParam
-            v-bind="filter"
-            :itemComponent="itemComponent"
-            :no-title="itemNoTitle"
-            @change="filterChange"
-          >
-            <template #header="{ title }">
-              <slot name="header" :title="title"></slot>
-            </template>
-          </CatalogFilterParam>
-        </slot>
-      </template>
+      <!--      <template v-for="filter in filters">-->
+      <!--        <slot v-bind="{ filter, filterChange }" @change="filterChange">-->
+      <component
+        v-for="filter in filters"
+        :key="filter.name"
+        :is="itemComponent"
+        v-bind="itemComponentProps"
+      >
+        <CatalogFilterParam
+          v-bind="filter"
+          :open-class="openParamClass"
+          :no-title="itemNoTitle"
+          @change="filterChange"
+        >
+          <template #header="{ title, showToggle, isOpen }">
+            <slot
+              name="header"
+              :title="title"
+              :showToggle="showToggle"
+              :isOpen="isOpen"
+            ></slot>
+          </template>
+        </CatalogFilterParam>
+      </component>
+      <!--        </slot>-->
+      <!--      </template>-->
     </component>
     <slot name="after" :filters="filters" :filterChange="filterChange"></slot>
   </div>

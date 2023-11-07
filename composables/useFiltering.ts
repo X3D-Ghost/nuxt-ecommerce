@@ -20,7 +20,7 @@ export const useFiltering = async () => {
         console.error(response);
       },
       onResponse({ response }) {
-        console.log("onResponse", response._data);
+        // console.log("onResponse", response._data);
         attributes.value = response._data;
         getFilterParams();
         activeParams.value = getActiveParams();
@@ -80,9 +80,9 @@ export const useFiltering = async () => {
   );
 
   function getActiveParams() {
-    console.log(
+    /*console.log(
       attributes.value.filter((item) => item.value && item.value.length)
-    );
+    );*/
     return attributes.value
       .filter((item) => item.value && item.value.length)
       .map((item) => {

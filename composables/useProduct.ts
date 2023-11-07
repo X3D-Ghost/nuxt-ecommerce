@@ -26,15 +26,15 @@ export const useProduct = async () => {
         slug: encodeURIComponent(slug.value),
       },
       onResponse({ response }) {
-        console.debug({ response });
+        // console.debug({ response });
       },
       onRequest(context: FetchContext): Promise<void> | void {
-        console.debug({ context });
+        // console.debug({ context });
       },
       onRequestError(
         context: FetchContext & { error: Error }
       ): Promise<void> | void {
-        console.debug(context);
+        // console.debug(context);
       },
     }
   );

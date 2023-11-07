@@ -29,7 +29,7 @@ function remove(param, value) {
   console.log(route.query[`f[${param.slug}]`]);
   const newQuery = { ...route.query };
   delete newQuery[queryParam];
-  console.log(route.query);
+  console.log(route.query, newQuery);
   router.push({ query: newQuery, replace: true });
 }
 </script>

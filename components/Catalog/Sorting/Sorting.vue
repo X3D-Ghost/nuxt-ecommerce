@@ -2,14 +2,18 @@
 const props = defineProps({
   items: Array,
 });
+
+const sorting = useSorting();
+
+const { order, orderby } = sorting;
 </script>
 
 <template>
-  <div>
+  <div class="sorting">
     <slot name="before"></slot>
-    <div>
+    <div class="sorting__list">
       <slot>
-        <template v-for="item in items">
+        <template v-for="(item, i) in items" :key="i">
           <slot name="item" :item="item">
             <!--            <NuxtLink
               :to="{ query: { orderby: item.slug, order: item.order } }"
@@ -24,4 +28,12 @@ const props = defineProps({
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss">
+.sorting {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+</style>

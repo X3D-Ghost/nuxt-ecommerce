@@ -42,12 +42,12 @@ export const useCatalog = () => {
         categoryData.parent = response._data.parent;
         categoryData.count = response._data.count;
         if (process.server) {
-          console.log(response._data);
+          // console.log(response._data);
         }
       },
       onResponseError({ request, response, options }) {
         // Handle the response errors
-        console.error(response);
+        // console.error(response);
       },
     });
   }

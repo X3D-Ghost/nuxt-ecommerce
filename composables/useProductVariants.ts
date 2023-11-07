@@ -33,7 +33,7 @@ export const useProductVariants = async ({ id, attrs }) => {
             options: getAttributeOptions(item.id),
           });
         });
-        console.log(attributes.value);
+        // console.log(attributes.value);
       },
       /*onRequestError(
         context: FetchContext & { error: Error }
@@ -58,7 +58,7 @@ export const useProductVariants = async ({ id, attrs }) => {
 
   function getAttributeOptions(id) {
     const items = [];
-    console.log("getAttributeOptions", rawAttrs);
+    // console.log("getAttributeOptions", rawAttrs);
     rawAttrs.value.forEach((item) => {
       let option = item.attributes.find((result) => result.id === id);
       // console.log({ id, option: option });

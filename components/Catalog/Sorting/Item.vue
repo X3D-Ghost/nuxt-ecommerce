@@ -4,12 +4,19 @@ const props = defineProps({
   order: String,
   label: String,
 });
+const { query } = useRoute();
 </script>
 
 <template>
-  <NuxtLink :to="{ query: { orderby: slug, order: order } }">{{
-    label
-  }}</NuxtLink>
+  <NuxtLink
+    :to="{ query: { ...query, orderby: slug, order: order } }"
+    class="sorting-item"
+    >{{ label }}</NuxtLink
+  >
 </template>
 
-<style scoped></style>
+<style lang="scss">
+.sorting-item {
+  text-decoration: none;
+}
+</style>
