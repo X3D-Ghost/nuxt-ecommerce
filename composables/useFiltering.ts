@@ -14,17 +14,15 @@ export const useFiltering = async () => {
       query: {
         // slug: slug.value,
       },
+      lazy: true,
       server: false,
       onResponseError({ request, response, options }) {
-        // Handle the response errors
         console.error(response);
       },
       onResponse({ response }) {
-        // console.log("onResponse", response._data);
         attributes.value = response._data;
         getFilterParams();
         activeParams.value = getActiveParams();
-        // attributes.push(...response._data);
       },
     });
     // });
@@ -32,11 +30,7 @@ export const useFiltering = async () => {
   get();
   const getFilterParams = () => {
     const returnData = attributes.value ?? [];
-    // console.log({ returnData });
     returnData.forEach((item) => {
-      // console.log({ item });
-      // console.log(route.query[`f[${item.slug}]`]);
-      // console.log(typeof route.query[`f[${item.slug}]`]);
       item.value =
         typeof route.query[`f[${item.slug}]`] === "string"
           ? route.query[`f[${item.slug}]`].split(",")
@@ -47,10 +41,7 @@ export const useFiltering = async () => {
         }
       });
       item.value.map((val) => (parseFloat(val) ? parseFloat(val) : val));
-      // console.log(item.value);
     });
-    // return returnData;
-    // console.log({ returnData });
     filterParams.value = returnData;
   };
 

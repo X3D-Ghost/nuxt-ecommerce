@@ -16,6 +16,10 @@ const props = defineProps({
     type: String,
     default: "руб",
   },
+  discountComponent: {
+    type: [String, Object],
+    default: "span",
+  },
 });
 </script>
 
@@ -27,9 +31,14 @@ const props = defineProps({
       </span>
     </slot>
     <slot name="discount" v-bind="{ discount }">
-      <BBadge class="product-price__discount text-light" pill variant="danger">
+      <component
+        :is="discountComponent"
+        class="product-price__discount text-light"
+        pill
+        variant="danger"
+      >
         -30%
-      </BBadge>
+      </component>
     </slot>
     <slot v-if="oldPrice" name="oldPrice" v-bind="{ oldPrice }">
       <span class="product-price__value product-price__value_old">

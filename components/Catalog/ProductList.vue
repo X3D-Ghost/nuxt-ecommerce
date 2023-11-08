@@ -6,6 +6,9 @@ const props = defineProps({
   },
   gridClass: [String, Array],
   itemClass: [String, Array],
+  isLoading: {
+    type: Boolean,
+  },
 });
 </script>
 
