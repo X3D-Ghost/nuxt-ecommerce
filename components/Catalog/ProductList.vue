@@ -9,13 +9,24 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
   },
+  skeletonCount: {
+    type: Number,
+    default: 12,
+  },
 });
 </script>
 
 <template>
   <div class="product-list">
     <slot name="before-grid"></slot>
-    <div class="grid" :class="gridClass">
+    <div v-if="isLoading" class="grid" :class="gridClass">
+      <slot name="loading">
+        <template v-for="i in skeletonCount" :key="`skeleton-${i}`">
+          <slot name="skeleton-item"></slot>
+        </template>
+      </slot>
+    </div>
+    <div v-else class="grid" :class="gridClass">
       <slot>
         <div
           v-for="item in items"
