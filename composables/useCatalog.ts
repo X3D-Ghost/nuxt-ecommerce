@@ -1,12 +1,23 @@
+type categoryDataType = {
+  id: number;
+  description: string;
+  name: string;
+  parent: number;
+  slug: string;
+  count: number;
+  items: itemType[];
+};
+type itemType = { id: number; slug: string; description: string };
+
 export const useCatalog = async () => {
   const nuxtApp = useNuxtApp();
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
+  const url: string = `${BACKEND_API_URL}/wc/v3/products/category`;
 
   const route = useRoute();
   const query = computed(() => useRoute().query);
   const router = useRouter();
-  // const slug = ref("");
   const slug = computed(() => {
     if (route.params.slug) {
       let lastIndex = route.params.slug.length - 1;
@@ -21,7 +32,6 @@ export const useCatalog = async () => {
   });
   const products = ref([]);
   const categoryData = reactive({ count: 0 });
-  // const categoryData = ref({ count: 0 });
   const page = route.query.page;
   const perPage = ref(400);
 
@@ -45,15 +55,12 @@ export const useCatalog = async () => {
     });*/
 
   // async function get() {
-  // console.log({ route, query });
-  console.log(slug.value);
-  console.log(query.value);
   const { data, pending, error, refresh } = await useAsyncData(
     // "categoryProducts",
     `categoryProducts-${slug}`,
     // "",
     async () =>
-      await $fetch(`${BACKEND_API_URL}/wc/v3/products/category`, {
+      await $fetch(url, {
         query: {
           cat: slug.value,
           per_page: perPage.value,

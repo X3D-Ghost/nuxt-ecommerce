@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const emit = defineEmits(["submit"]);
+// const emit = defineEmits(["submit"]);
 
-function submit() {
+/*function submit() {
   emit("submit");
-}
+}*/
 </script>
 
 <template>
-  <form class="quick-buy" @submit="submit">
+  <form class="quick-buy" v-bind="$attrs">
     <slot name="before"></slot>
     <slot>
       <button>Купить в 1 клик</button>
