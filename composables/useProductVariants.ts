@@ -27,11 +27,14 @@ export const useProductVariants = async ({ id, attrs }) => {
           }))
         );*/
         attrs.forEach((item) => {
-          attributes.value.push({
-            text: item.name,
-            id: item.id,
-            options: getAttributeOptions(item.id),
-          });
+          const options = getAttributeOptions(item.id);
+          if (options.length) {
+            attributes.value.push({
+              text: item.name,
+              id: item.id,
+              options,
+            });
+          }
         });
         // console.log(attributes.value);
       },
