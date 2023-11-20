@@ -9,7 +9,12 @@ type categoryDataType = {
 };
 type itemType = { id: number; slug: string; description: string };
 
-export const useCatalog = async () => {
+type optionsType = {
+  url?: string;
+  params: object;
+};
+
+export const useCatalog = async (options: optionsType) => {
   const nuxtApp = useNuxtApp();
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
@@ -65,6 +70,7 @@ export const useCatalog = async () => {
           cat: slug.value,
           per_page: perPage.value,
           ...useRoute().query,
+          ...options.params,
         },
         onRequest(context) {
           console.log("get catalog");

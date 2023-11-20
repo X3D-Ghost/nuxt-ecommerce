@@ -35,6 +35,7 @@ const props = defineProps({
         >
           <slot name="item" v-bind="item">
             <ProductCard
+              v-bind="item"
               :name="item.name"
               :price="item.price"
               :slug="item.slug"

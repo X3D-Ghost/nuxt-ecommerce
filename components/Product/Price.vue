@@ -32,12 +32,13 @@ const props = defineProps({
     </slot>
     <slot name="discount" v-bind="{ discount }">
       <component
+        v-if="discount"
         :is="discountComponent"
         class="product-price__discount text-light"
         pill
         variant="danger"
       >
-        -30%
+        {{ discount }}
       </component>
     </slot>
     <slot v-if="oldPrice" name="oldPrice" v-bind="{ oldPrice }">

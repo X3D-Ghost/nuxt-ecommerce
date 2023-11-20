@@ -1,3 +1,11 @@
+type ContactData = {
+  name?: string;
+  phone?: string;
+  email?: string;
+  text?: string;
+  description?: string;
+};
+
 export const useContactForm = () => {
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
@@ -5,7 +13,7 @@ export const useContactForm = () => {
 
   const requestMethod: "POST" | "GET" = "POST";
 
-  async function create(orderData: orderDataType) {
+  async function create(orderData: ContactData) {
     await $fetch(url, {
       method: requestMethod,
       body: orderData,
