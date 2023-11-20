@@ -70,7 +70,7 @@ export const useCatalog = async (options: optionsType) => {
           cat: slug.value,
           per_page: perPage.value,
           ...useRoute().query,
-          ...options.params,
+          ...options?.params,
         },
         onRequest(context) {
           console.log("get catalog");
