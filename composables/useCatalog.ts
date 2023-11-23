@@ -14,7 +14,7 @@ type optionsType = {
   params: object;
 };
 
-export const useCatalog = async (options: optionsType) => {
+export const useCatalog = async (options?: optionsType) => {
   const nuxtApp = useNuxtApp();
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;

@@ -1,4 +1,9 @@
-export const useFiltering = async () => {
+type optionsType = {
+  url?: string;
+  params: object;
+};
+
+export const useFiltering = async (options?: optionsType) => {
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
 
@@ -8,11 +13,12 @@ export const useFiltering = async () => {
   const filterParams = ref(null);
   const activeParams = ref(null);
   provide("activeFilters", activeParams);
-  async function get() {
+  async function get(params?: object) {
     // watchEffect(() => {
     await useFetch(`${BACKEND_API_URL}/wc/v3/products/filters`, {
       query: {
         // slug: slug.value,
+        ...options?.params,
       },
       lazy: true,
       server: false,
