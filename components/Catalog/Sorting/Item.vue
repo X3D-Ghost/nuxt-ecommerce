@@ -11,8 +11,10 @@ const { query } = useRoute();
   <NuxtLink
     :to="{ query: { ...query, orderby: slug, order: order } }"
     class="sorting-item"
-    >{{ label }}</NuxtLink
   >
+    <slot name="icon"></slot>
+    {{ label }}
+  </NuxtLink>
 </template>
 
 <style lang="scss">

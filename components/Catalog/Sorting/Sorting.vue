@@ -13,13 +13,17 @@ const { order, orderby } = sorting;
     <slot name="before"></slot>
     <div class="sorting__list">
       <slot>
-        <template v-for="(item, i) in items" :key="i">
+        <template v-for="(item, i) in items" :key="item.key ?? i">
           <slot name="item" :item="item">
             <!--            <NuxtLink
               :to="{ query: { orderby: item.slug, order: item.order } }"
               >{{ item.name }}</NuxtLink
             >-->
-            <CatalogSortingItem v-bind="item"></CatalogSortingItem>
+            <CatalogSortingItem v-bind="item">
+              <template #icon>
+                <slot :name="`icon-${item.key}`"></slot>
+              </template>
+            </CatalogSortingItem>
           </slot>
         </template>
       </slot>
