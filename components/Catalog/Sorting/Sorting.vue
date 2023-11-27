@@ -21,7 +21,9 @@ const { order, orderby } = sorting;
             >-->
             <CatalogSortingItem v-bind="item">
               <template #icon>
-                <slot :name="`icon-${item.key}`"></slot>
+                <slot
+                  :name="item.key ? `icon-${item.key}` : 'default-icon'"
+                ></slot>
               </template>
             </CatalogSortingItem>
           </slot>
