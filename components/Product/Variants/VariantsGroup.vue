@@ -1,20 +1,24 @@
 <script setup lang="ts">
 const props = defineProps({
-  text: String,
+  label: String,
   id: Number,
   options: Array,
+  modelValue: {
+    type: Object,
+    required: true,
+  },
 });
 console.log({ props });
 </script>
 
 <template>
   <div class="variants-group">
-    <slot name="label" :label="text">
-      <p>{{ text }}</p>
+    <slot name="label" :label="label">
+      <p>{{ label }}</p>
     </slot>
     <div class="variants__list">
       <template v-for="option in options">
-        <slot name="item" v-bind="{ value: option, text, id }">
+        <slot name="item" v-bind="{ value: option, label, id }">
           <ProductVariantsItem :value="option"> </ProductVariantsItem>
         </slot>
       </template>
