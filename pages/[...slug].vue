@@ -4,7 +4,7 @@ const { pageData } = await usePage();
 <template>
   <main>
     <div class="container">
-      <PageTitle>{{ pageData.title.rendered }}</PageTitle>
+      <PageTitle>{{ pageData?.title.rendered }}</PageTitle>
     </div>
     <div class="container">
       <article
