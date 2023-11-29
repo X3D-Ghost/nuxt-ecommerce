@@ -15,10 +15,11 @@ type ParamsType = {
   value: string | number;
 };
 
-export const useProductVariants = async ({ id, attrs }) => {
+export const useProductVariants = ({ id, attrs }) => {
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
   const route = useRoute();
+  const router = useRouter();
   const options = [];
   const rawAttrs = ref([]);
   const attributes: Ref<attributeType[]> = ref([]);
@@ -32,20 +33,43 @@ export const useProductVariants = async ({ id, attrs }) => {
 
   watch(
     () => currentParams,
-    (value, oldValue) => {
-      console.log(value, oldValue);
-      console.log("params changed");
+    (value: object) => {
+      currentVariant.value = findVariationByParams(value);
+      router.push({ query: { variant: currentVariant.value } });
     },
     { deep: true }
   );
 
-  const { data, pending, error, refresh } = await useLazyFetch(
+  function findVariationByParams(params: object): number | null {
+    return variations.value.find((result) => {
+      const paramsArray = Object.keys(params).map(
+        (el: string): ParamsType => ({
+          id: parseInt(el),
+          option: params[el],
+        })
+      );
+      return paramsArray.reduce((acc: boolean, item: ParamsType): boolean => {
+        const foundAttr = result.attributes.find((attr: ParamsType) => {
+          return (
+            attr.id === item.id &&
+            kebabCase(decodeURIComponent(attr.option)) ===
+              kebabCase(decodeURIComponent(item.option))
+          );
+        });
+        if (!foundAttr) return false;
+        return acc && !!foundAttr;
+      }, true);
+    })?.id;
+  }
+
+  const { data, pending, error, refresh } = useLazyFetch(
     `${BACKEND_API_URL}/wc/v3/products/${id}/variations`,
     {
       server: false,
       // lazy: true,
       query: {
         // slug: encodeURIComponent(slug.value),
+        per_page: 100,
       },
       onResponse({ response }) {
         rawAttrs.value = response._data;
@@ -73,16 +97,16 @@ export const useProductVariants = async ({ id, attrs }) => {
             const foundValue = foundProduct?.attributes.find(
               (el) => el.id === id
             ).option;
-            // console.log({ foundValue });
-            // console.log(currentParams[id]);
-            // currentParams[id].value = foundValue;
             Object.assign(currentParams, {
-              [id]: decodeURIComponent(foundValue),
+              [id]: kebabCase(decodeURIComponent(foundValue)),
             });
-            // console.log({ currentParams });
           });
         }
-        // console.log(attributes.value);
+        nextTick(() => {
+          if (currentParams) {
+            findVariationByParams(currentParams);
+          }
+        });
       },
       /*onRequestError(
         context: FetchContext & { error: Error }
