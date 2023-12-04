@@ -39,5 +39,12 @@ export function getSubdomain(url: string): string | null {
   if (url.includes("://")) {
     domain = url.split("://")[1];
   }
-  return domain.split(".")[0];
+  if (url.includes("localhost")) {
+    return domain.split(".")[0];
+  }
+  if (domain.split(".").length > 2) {
+    return domain.split(".")[0];
+  } else {
+    return null;
+  }
 }
