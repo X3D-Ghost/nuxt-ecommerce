@@ -24,3 +24,9 @@ export function objectsDeepEqual(object1: object, object2: object): boolean {
 export function isObject(object: object): boolean {
   return object != null && typeof object === "object";
 }
+
+export function getValue(obj: object, path: string): object | string {
+  if (!path) return obj;
+  const properties: string[] = path.split(".");
+  return getValue(obj[properties.shift()], properties.join("."));
+}
