@@ -1,28 +1,43 @@
 <script setup lang="ts">
 const props = defineProps({
-  min: Number,
-  max: Number,
+  min: { type: Number, default: 0 },
+  max: { type: Number, default: 0 },
   currency: {
     type: String,
     default: "руб",
   },
+  modelValue: {
+    type: Array,
+    default: () => [null, null],
+  },
 });
-const emit = defineEmits(["change"]);
+const emit = defineEmits(["change", "update:modelValue"]);
 
-const price = reactive({ min: 0, max: 9999 });
-price.min = props.min;
-price.max = props.max;
-function update() {
-  emit("change");
+const rangeValue = ref([
+  props.modelValue[0] || props.min,
+  props.modelValue[1] || props.max,
+]);
+
+function update(val: number[]) {
+  rangeValue.value = val;
+  emit("update:modelValue", val);
+  emit("change", val);
 }
 function filterChange(e) {
-  console.log("changed", e);
   const filerParam = {
     name: "price",
-    value: `${price.min}-${price.max}`,
+    value: props.modelValue,
   };
-  emit("change", filerParam);
+  emit("update:modelValue", filerParam);
 }
+
+watch(
+  () => rangeValue,
+  (val) => {
+    console.log(val, "price changed");
+    filterChange(val);
+  }
+);
 </script>
 
 <template>
@@ -30,21 +45,19 @@ function filterChange(e) {
     <slot name="header"><p>Цена</p></slot>
     <div class="d-flex">
       <slot name="input-min-price" v-bind="filterChange">
-        <InputField
-          v-model="price.min"
-          :value="price.min"
-          @input="filterChange"
-        />
+        <InputField v-model.lazy.number="rangeValue[0]" />
       </slot>
       <slot name="input-max-price" v-bind="filterChange">
-        <InputField
-          v-model="price.max"
-          :value="price.max"
-          @input="filterChange"
-        />
+        <InputField v-model.lazy.number="rangeValue[1]" />
       </slot>
-      <span>{{ currency }}</span>
+      <slot name="currency">
+        <span>{{ currency }}</span>
+      </slot>
     </div>
+    <slot
+      name="after"
+      v-bind="{ filterChange, min, max, rangeValue, update }"
+    />
   </div>
 </template>
 
