@@ -15,6 +15,7 @@ type optionsType = {
 };
 
 export const useCatalog = async (options?: optionsType) => {
+  console.log({ options });
   const nuxtApp = useNuxtApp();
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
@@ -40,25 +41,6 @@ export const useCatalog = async (options?: optionsType) => {
   const page = route.query.page;
   const perPage = ref(400);
 
-  // let pending = null;
-
-  /*  if (route.params.slug) {
-    let lastIndex = route.params.slug.length - 1;
-    if (!route.params.slug[lastIndex]) {
-      slug.value = encodeURIComponent(route.params.slug[lastIndex - 1]);
-    } else {
-      slug.value = encodeURIComponent(route.params.slug[lastIndex]);
-    }
-  } else {
-    slug.value = "";
-  }*/
-
-  /*    const { data, error, pending } = await useFetch('/api/data', {
-        getCachedData(key) {
-            return nuxtApp.payload.data[key] || nuxtApp.static.data[key]
-        },
-    });*/
-
   // async function get() {
   const { data, pending, error, refresh } = await useAsyncData(
     // "categoryProducts",
@@ -81,21 +63,16 @@ export const useCatalog = async (options?: optionsType) => {
           console.error(response);
         },
         onResponse({ response }) {
-          /*products.value = response._data.items;
-            categoryData.id = response._data.id;
-            categoryData.name = response._data.name;
-            categoryData.slug = response._data.slug;
-            categoryData.description = response._data.description;
-            categoryData.parent = response._data.parent;
-            categoryData.count = response._data.count;*/
           if (process.client) {
-            products.value = response._data.items;
-            categoryData.id = response._data.id;
-            categoryData.name = response._data.name;
-            categoryData.slug = response._data.slug;
-            categoryData.description = response._data.description;
-            categoryData.parent = response._data.parent;
-            categoryData.count = response._data.count;
+            let { items, ...category } = response._data;
+            products.value = items;
+            Object.assign(categoryData, category);
+            // categoryData.id = response._data.id;
+            // categoryData.name = response._data.name;
+            // categoryData.slug = response._data.slug;
+            // categoryData.description = response._data.description;
+            // categoryData.parent = response._data.parent;
+            // categoryData.count = response._data.count;
           }
         },
         onResponseError({ request, response, options }) {
@@ -107,68 +84,23 @@ export const useCatalog = async (options?: optionsType) => {
       watch: [slug, query],
       initialCache: false,
       server: true,
-      // lazy: true,
-      // deep: false,
-      /*getCachedData(key) {
-        console.log("cache");
-        console.log([nuxtApp.payload.data[key], nuxtApp.static.data[key]]);
-        return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
-      },*/
     }
   );
-  console.log("response ok");
-  console.log({ data });
-  products.value = data.value && data.value.items;
+  /*products.value = data.value && data.value.items;
   categoryData.id = data.value.id;
   categoryData.name = data.value.name;
   categoryData.slug = data.value.slug;
   categoryData.description = data.value.description;
   categoryData.parent = data.value.parent;
-  categoryData.count = data.value.count;
-  // console.log(categoryData);
-  // console.log(data.value);
-  // console.log({ data, pending, error, refresh });
-  // return { pending, refresh };
-  // }
-  // const { pending, refresh } = await get();
-
-  /*  function getItems() {
-    return products;
-  }*/
-
-  /* function getCategoryData() {
-    return categoryData;
-  }*/
-
-  /*function refresh() {
-    get();
-  }*/
-  /*  watch(
-    async () => useRoute().query,
-    // () => query,
-    // route.query,
-    // query,
-    (newRoute, oldRoute) => {
-      console.log({ newRoute, oldRoute });
-      // console.log(useRoute().query);
-      // console.log(refresh);
-      // console.log(newRoute. );
-      // refresh();
-      // await get();
-      nextTick(() => {
-        refresh();
-      });
-    }
-  );*/
+  categoryData.count = data.value.count;*/
+  let { items, ...category } = data?.value;
+  products.value = items;
+  Object.assign(categoryData, category);
 
   return {
-    // get,
-    // getItems,
-    // getCategoryData,
     data,
     pending,
     refresh,
-    // products: data && data.value && data.value.items ? data.value.items : null,
     products,
     categoryData,
   };
