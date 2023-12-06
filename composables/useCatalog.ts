@@ -15,7 +15,7 @@ type optionsType = {
 };
 
 export const useCatalog = async (options?: optionsType) => {
-  console.log({ options });
+  console.debug({ options });
   const nuxtApp = useNuxtApp();
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
@@ -23,6 +23,12 @@ export const useCatalog = async (options?: optionsType) => {
 
   const route = useRoute();
   const query = computed(() => useRoute().query);
+  const additionalParams = computed(() => options?.params);
+  const price = computed(() => ({
+    min_price: useRoute()?.query?.price?.split("-")[0],
+    max_price: useRoute()?.query?.price?.split("-")[1],
+  }));
+  console.debug({ additionalParams });
   const router = useRouter();
   const slug = computed(() => {
     if (route.params.slug) {
@@ -52,7 +58,8 @@ export const useCatalog = async (options?: optionsType) => {
           cat: slug.value,
           per_page: perPage.value,
           ...useRoute().query,
-          ...options?.params,
+          ...additionalParams.value,
+          ...price.value,
         },
         onRequest(context) {
           console.log("get catalog");
@@ -63,8 +70,8 @@ export const useCatalog = async (options?: optionsType) => {
           console.error(response);
         },
         onResponse({ response }) {
-          if (process.client) {
-            let { items, ...category } = response._data;
+          if (process.client && response?._data) {
+            let { items, ...category } = response?._data;
             products.value = items;
             Object.assign(categoryData, category);
             // categoryData.id = response._data.id;
@@ -81,7 +88,7 @@ export const useCatalog = async (options?: optionsType) => {
         },
       }),
     {
-      watch: [slug, query],
+      watch: [slug, query, "options.params"],
       initialCache: false,
       server: true,
     }
@@ -93,9 +100,11 @@ export const useCatalog = async (options?: optionsType) => {
   categoryData.description = data.value.description;
   categoryData.parent = data.value.parent;
   categoryData.count = data.value.count;*/
-  let { items, ...category } = data?.value;
-  products.value = items;
-  Object.assign(categoryData, category);
+  if (data) {
+    let { items, ...category } = data?.value;
+    products.value = items;
+    Object.assign(categoryData, category);
+  }
 
   return {
     data,
