@@ -15,7 +15,6 @@ type optionsType = {
 };
 
 export const useCatalog = async (options?: optionsType) => {
-  console.debug({ options });
   const nuxtApp = useNuxtApp();
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
@@ -28,7 +27,6 @@ export const useCatalog = async (options?: optionsType) => {
     min_price: useRoute()?.query?.price?.split("-")[0],
     max_price: useRoute()?.query?.price?.split("-")[1],
   }));
-  console.debug({ additionalParams });
   const router = useRouter();
   const slug = computed(() => {
     if (route.params.slug) {
@@ -93,15 +91,8 @@ export const useCatalog = async (options?: optionsType) => {
       server: true,
     }
   );
-  /*products.value = data.value && data.value.items;
-  categoryData.id = data.value.id;
-  categoryData.name = data.value.name;
-  categoryData.slug = data.value.slug;
-  categoryData.description = data.value.description;
-  categoryData.parent = data.value.parent;
-  categoryData.count = data.value.count;*/
   if (data) {
-    let { items, ...category } = data?.value;
+    let { items, ...category } = data?.value || { items: [] };
     products.value = items;
     Object.assign(categoryData, category);
   }
