@@ -53,7 +53,7 @@ export const useCatalog = async (options?: optionsType) => {
     async () =>
       await $fetch(url, {
         query: {
-          cat: slug.value,
+          cat: slug.value ?? null,
           per_page: perPage.value,
           ...useRoute().query,
           ...additionalParams.value,
