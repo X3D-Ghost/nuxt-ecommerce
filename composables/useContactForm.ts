@@ -6,33 +6,28 @@ type ContactData = {
   description?: string;
 };
 
-export const useContactForm = () => {
+type optionsType = {
+  url?: string;
+  params: object;
+  requestMethod?: "POST" | "GET";
+};
+
+export const useContactForm = (options?: optionsType) => {
   const runtimeConfig = useRuntimeConfig();
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
-  const url: string = `${BACKEND_API_URL}/wc/v3/orders`;
+  const url: string = options?.url || `${BACKEND_API_URL}/wc/v3/orders`;
 
-  const requestMethod: "POST" | "GET" = "POST";
+  const requestMethod: "POST" | "GET" = options?.requestMethod || "POST";
 
-  async function create(orderData: ContactData) {
-    await $fetch(url, {
+  async function send(formData: ContactData) {
+    return await $fetch(url, {
       method: requestMethod,
-      body: orderData,
-      onRequest(context) {
-        // console.log("create order");
-        console.log({ context });
-        // Promise.resolve();
-      },
+      body: formData,
       onRequestError({ request, response, options }) {
-        // Handle the response errors
-        console.error(response);
-        Promise.reject();
-      },
-      onResponse({ response }) {
-        Promise.resolve();
+        console.warn(response);
       },
     });
-    // return { data, pending, error, refresh };
   }
 
-  return { create };
+  return { send };
 };
