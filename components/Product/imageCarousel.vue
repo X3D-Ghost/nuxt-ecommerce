@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Thumbs } from "swiper/modules";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+const modules = [FreeMode, Navigation, Thumbs];
 const props = defineProps({
   images: {
     type: Array,
@@ -8,8 +9,14 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  direction: {
+    type: String,
+    default: "vertical",
+    validator(value: string): boolean {
+      return ["horizontal", "vertical"].includes(value);
+    },
+  },
 });
-const currentSlide = ref(0);
 
 const thumbsSwiper = ref(null);
 
@@ -23,57 +30,41 @@ const carousel = ref(null);
 <template>
   <div class="grid image-carousel__wrapper gap-0">
     <div v-if="showThumbs" class="g-col-12 g-col-md-2 image-carousel__thumbs">
-      <!--      <div class="grid image-carousel__thumb-track">
-        <div
+      <Swiper
+        direction="vertical"
+        :modules="modules"
+        watchSlidesProgress
+        :slidesPerView="5"
+        freeMode
+        :pagination="{
+          clickable: true,
+        }"
+        class="image-carousel__thumb-track"
+        @swiper="setThumbsSwiper"
+      >
+        <SwiperSlide
           v-for="(image, i) in images"
           :key="image.src"
           class="carousel__item image-carousel__thumb"
-          :class="i === currentSlide && 'active'"
-          @click="currentSlide = i"
         >
-          <img
-            class="image-carousel__thumb-image"
-            :src="image.src"
-            alt="Image"
-          />
-        </div>
-      </div>-->
-      <Swiper
-        :modules="[Thumbs]"
-        watch-slides-progress
-        @swiper="setThumbsSwiper"
-        vertical
-      >
-        <SwiperSlide v-for="(image, i) in images">
-          <div
-            v-for="(image, i) in images"
-            :key="image.src"
-            class="carousel__item image-carousel__thumb"
-            :class="i === currentSlide && 'active'"
-            @click="currentSlide = i"
-          >
-            <slot name="thumb" :src="image.src">
-              <img
-                class="image-carousel__thumb-image"
-                :src="image.src"
-                alt="Image"
-              />
-            </slot>
-          </div>
+          <slot name="thumb" :src="image.src">
+            <img
+              class="image-carousel__thumb-image"
+              :src="image.src"
+              alt="Image"
+            />
+          </slot>
         </SwiperSlide>
       </Swiper>
     </div>
     <div class="g-col-12 g-col-md-10 image-carousel">
       <Swiper
+        :navigation="true"
         ref="carousel"
         autoplay
-        :wrap-around="true"
-        v-model="currentSlide"
-        :zoom="true"
         prefix="image-carousel"
-        :activeIndex="currentSlide"
-        :thumbs="{ swiper: thumbsSwiper || null }"
-        :modules="[Thumbs]"
+        :thumbs="{ swiper: thumbsSwiper }"
+        :modules="modules"
         class=""
       >
         <SwiperSlide v-for="image in images" :key="image.src">
@@ -83,10 +74,6 @@ const carousel = ref(null);
             </slot>
           </div>
         </SwiperSlide>
-        <!--      <template #addons>
-				&lt;!&ndash;        <CarouselPagination />&ndash;&gt;
-				&lt;!&ndash;        <Carouselnavigation />&ndash;&gt;
-							</template>-->
       </Swiper>
     </div>
   </div>
@@ -97,8 +84,10 @@ const carousel = ref(null);
 .image-carousel {
   &__wrapper {
     display: grid;
+    max-height: 50vh;
   }
   &__thumbs {
+    max-height: 100%;
     @include media-breakpoint-down(md) {
       grid-row: 2;
       overflow-x: scroll;
