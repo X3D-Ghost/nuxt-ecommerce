@@ -75,12 +75,12 @@ function showToggle() {
 </script>
 
 <template>
-  <component :is="itemComponent" class="filter__param" :title="name">
+  <component :is="itemComponent" class="filter__param" :header="name">
     <slot v-bind="{ filterChange, values, name }">
       <slot
         v-if="!noTitle"
         name="header"
-        :title="name"
+        :header="name"
         :showToggle="showToggle"
         :isOpen="isOpen"
       >
