@@ -41,15 +41,19 @@ const carousel = ref(null);
         }"
         class="image-carousel__thumb-track"
         @swiper="setThumbsSwiper"
+        slideActiveClass="active"
       >
         <SwiperSlide
-          v-for="(image, i) in images"
+          v-for="image in images"
           :key="image.src"
+          v-slot="{ isActive }"
           class="carousel__item image-carousel__thumb"
+          :class="isActive && 'active'"
         >
-          <slot name="thumb" :src="image.src">
+          <slot name="thumb" :src="image.src" :isActive="isActive">
             <img
               class="image-carousel__thumb-image"
+              :class="isActive && 'active'"
               :src="image.src"
               alt="Image"
             />
