@@ -60,10 +60,10 @@ function filterChange(param) {
           :no-title="itemNoTitle"
           @change="filterChange"
         >
-          <template #header="{ title, showToggle, isOpen }">
+          <template #header="{ header, showToggle, isOpen }">
             <slot
               name="header"
-              :title="title"
+              :header="header"
               :showToggle="showToggle"
               :isOpen="isOpen"
             ></slot>
