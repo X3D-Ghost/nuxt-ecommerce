@@ -29,7 +29,7 @@ const breadcrumbItems = [{ text: "Главная", href: "/" }, { text: "Кат�
 <template>
   <div class="container">
     <Breadcrumbs :items="breadcrumbItems" />
-    <PageTitle> {{ categoryData.name }} </PageTitle>
+    <PageTitle> {{ categoryData?.name }} </PageTitle>
     <div class="grid">
       <aside class="g-col-12 g-col-lg-3">
         <LazyCatalogFilterCategories v-if="categories" :items="categories">

@@ -16,7 +16,7 @@
         <!--          <div class="g-col-12 pb-1">-->
         <CatalogSorting />
         <!--          </div>-->
-        <CatalogList />
+        <!--        <CatalogList />-->
         <!--          <div class="col-12">-->
         <!--          </div>-->
         <!--        </div>-->

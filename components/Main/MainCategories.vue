@@ -1,8 +1,9 @@
 <script setup>
-const { data } = await useAsyncData("/categories", () =>
+/*const { data } = await useAsyncData("/categories", () =>
   queryContent("/categories").findOne()
-);
-const items = data.value.body;
+);*/
+// const items = data?.value?.body || [];
+const items = [];
 </script>
 
 <template>

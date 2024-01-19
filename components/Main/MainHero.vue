@@ -1,8 +1,8 @@
 <script setup lang="ts">
-onMounted(() => {
+/*onMounted(() => {
   const { $bootstrap } = useNuxtApp();
   const carousel = new $bootstrap.Carousel("#header-carousel");
-});
+});*/
 const slides = [
   "/img/carousel-1.jpg",
   "/img/carousel-2.jpg",
@@ -15,7 +15,7 @@ const slides = [
     <div class="grid px-xl-5 hero-grid" style="--bs-rows: 2">
       <div class="g-col-lg-8" style="grid-row: span 2">
         <Carousel :autoplay="2000" :wrap-around="true" class="hero-carousel">
-          <Slide v-for="slide in slides" :key="slide">
+          <!--          <Slide v-for="slide in slides" :key="slide">
             <div class="carousel__item hero-carousel__item">
               <img class="" :src="slide" />
               <div
@@ -39,7 +39,7 @@ const slides = [
                 </div>
               </div>
             </div>
-          </Slide>
+          </Slide>-->
 
           <!--          <template #addons>-->
           <!--            <Pagination />-->
@@ -186,7 +186,7 @@ const slides = [
 </template>
 
 <style lang="scss">
-.hero-grid {
+/*.hero-grid {
   height: 430px;
   grid-template-rows: 1fr 1fr;
 }
@@ -235,5 +235,5 @@ const slides = [
     //width: 30px;
     //background: #FFFFFF;
   }
-}
+}*/
 </style>

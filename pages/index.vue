@@ -1,7 +1,7 @@
 <script setup lang="ts">
-definePageMeta({
+/*definePageMeta({
   layout: "home",
-});
+});*/
 </script>
 
 <template>
@@ -25,7 +25,7 @@ definePageMeta({
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
       <span class="bg-secondary pe-3">Featured Products</span>
     </h2>
-    <CatalogList />
+    <!--    <CatalogList />-->
   </div>
   <!-- Products End -->
 

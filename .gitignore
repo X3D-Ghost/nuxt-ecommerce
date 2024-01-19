@@ -1,10 +1,26 @@
 node_modules
+*.log
 *.log*
 .nuxt
+nuxt.d.ts
+.data
 .nitro
 .cache
 .output
 .env
+package-lock.json
+framework
 dist
+.DS_Store
 # Project exclude paths
 /template_src/
+
+# Yarn
+.yarn/cache
+.yarn/*state*
+
+# Local History
+.history
+
+# VSCode
+.vscode/

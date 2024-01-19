@@ -1,31 +1,35 @@
 {
-  "name": "textile-shop",
+  "name": "nuxt-ecommerce-layer",
   "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
   "type": "module",
+  "version": "0.0.3",
   "main": "./nuxt.config.ts",
+  "scripts": {
+    "dev": "nuxt dev .playground",
+    "build": "nuxt build .playground",
+    "generate": "nuxt generate .playground",
+    "preview": "nuxt preview .playground",
+    "lint": "eslint .",
+    "postinstall": "nuxt prepare .playground"
+  },
   "devDependencies": {
-    "@nuxt/devtools": "^0.8.2",
+    "@nuxt/devtools": "^1.0.6",
+    "@nuxt/eslint-config": "^0.2.0",
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/localforage": "^1.1.0",
     "@types/node": "^20.5.9",
     "eslint": "^8.48.0",
-    "eslint-config-prettier": "^8.10.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-nuxt": "^4.0.0",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.1",
     "nuxt": "^3.7.1",
-    "prettier": "^2.8.8"
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.4.11",
-    "animate.css": "^4.1.1",
+    "@nuxt/image": "^1.1.0",
+    "@pinia/nuxt": "^0.5.1",
     "sass": "^1.66.1"
   },
   "overrides": {
