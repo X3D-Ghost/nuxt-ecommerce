@@ -1,10 +1,4 @@
-<script setup lang="ts">
-// const emit = defineEmits(["submit"]);
-
-/*function submit() {
-  emit("submit");
-}*/
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <form class="quick-buy" v-bind="$attrs">
