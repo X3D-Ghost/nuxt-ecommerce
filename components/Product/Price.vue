@@ -20,14 +20,23 @@ const props = defineProps({
     type: [String, Object],
     default: "span",
   },
+  priceFormat: {
+    type: Boolean,
+    default: true,
+  },
 });
+
+const resultPrice = props.priceFormat ? formatPrice(props.price) : props.price;
+const resultOldPrice = props.priceFormat
+  ? formatPrice(props.oldPrice)
+  : props.oldPrice;
 </script>
 
 <template>
   <div class="product-price__wrapper">
-    <slot name="price" v-bind="{ price }">
-      <span class="product-price__value product-price__value_new">
-        {{ price }} {{ currency }}
+    <slot name="price" v-bind="{ price, resultPrice }">
+      <span v-if="price" class="product-price__value product-price__value_new">
+        {{ resultPrice }} {{ currency }}
       </span>
     </slot>
     <slot name="discount" v-bind="{ discount }">
@@ -41,9 +50,9 @@ const props = defineProps({
         {{ discount }}
       </component>
     </slot>
-    <slot v-if="oldPrice" name="oldPrice" v-bind="{ oldPrice }">
+    <slot v-if="oldPrice" name="oldPrice" v-bind="{ oldPrice, resultOldPrice }">
       <span class="product-price__value product-price__value_old">
-        {{ oldPrice }} {{ currency }}
+        {{ resultOldPrice }} {{ currency }}
       </span>
     </slot>
   </div>
