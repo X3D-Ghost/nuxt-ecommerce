@@ -8,7 +8,6 @@ const props = defineProps({
     required: true,
   },
 });
-console.log({ props });
 </script>
 
 <template>
@@ -27,10 +26,6 @@ console.log({ props });
 </template>
 
 <style lang="scss">
-.variants-group {
-  //display: flex;
-  //flex-wrap: wrap;
-}
 .variants__list {
   display: inline-flex;
 }

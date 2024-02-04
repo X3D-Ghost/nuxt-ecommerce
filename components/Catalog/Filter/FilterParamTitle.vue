@@ -8,7 +8,4 @@
   </div>
 </template>
 
-<style lang="scss">
-.filter-title {
-}
-</style>
+<style lang="scss"></style>

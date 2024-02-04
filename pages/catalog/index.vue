@@ -5,11 +5,8 @@ const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
 const categories = await useFetch(
   `${BACKEND_API_URL}/wc/v3/products/categories`,
   {
-    query: {
-      // slug: slug.value,
-    },
+    query: {},
     onResponseError({ request, response, options }) {
-      // Handle the response errors
       console.error(response);
     },
   }

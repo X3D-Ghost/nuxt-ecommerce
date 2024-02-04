@@ -6,8 +6,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-// const attributes = computed(() => props.items.map((item) => item.attributes));
 </script>
 
 <template>

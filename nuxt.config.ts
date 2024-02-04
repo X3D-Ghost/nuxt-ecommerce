@@ -17,7 +17,6 @@ export default defineNuxtConfig({
       API_ENDPOINT: process.env.NUXT_API_ENDPOINT,
     },
   },
-  // css: [resolve("./assets/scss/style.scss")],
   components: {
     dirs: [
       {
@@ -48,13 +47,6 @@ export default defineNuxtConfig({
       devSourcemap: true,
     },
   },
-  // components: [
-  //   {
-  //     global: true,
-  //     dirs: ["~/components"],
-  //     pathPrefix: false,
-  //   },
-  // ],
   modules: ["@nuxtjs/eslint-module", "@nuxt/image"],
   devtools: {
     enabled: true,

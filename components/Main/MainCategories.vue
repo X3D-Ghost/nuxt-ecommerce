@@ -1,8 +1,4 @@
 <script setup>
-/*const { data } = await useAsyncData("/categories", () =>
-  queryContent("/categories").findOne()
-);*/
-// const items = data?.value?.body || [];
 const items = [];
 </script>
 
@@ -16,7 +12,6 @@ const items = [];
           </div>
           <div class="flex-fill ps-3">
             <h6>{{ item.title }}</h6>
-            <!--              <small class="text-body">{{ item.count }} продуктов</small>-->
           </div>
         </div>
       </a>

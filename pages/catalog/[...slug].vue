@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import { usePage } from "~/composables/usePage";
-
 const catalog = useCatalog();
 
 const filter = await useFiltering();
 const category = await useCategory();
-// const page = await usePage();
-// const pagination = usePagination();
 
 const products = ref(catalog.products);
 const categoryData = reactive(catalog.categoryData);
 const categories = category.items;
-// const attributes = filter.get();
 const filterParams = filter.filterParams;
 
 function filterUpdate(param) {
@@ -33,9 +28,7 @@ const breadcrumbItems = [{ text: "Главная", href: "/" }, { text: "Кат�
     <div class="grid">
       <aside class="g-col-12 g-col-lg-3">
         <LazyCatalogFilterCategories v-if="categories" :items="categories">
-          <template #item="{ slug, name }">
-            <!--            <BButton :to="slug">{{ name }}</BButton>-->
-          </template>
+          <template #item="{ slug, name }"> </template>
         </LazyCatalogFilterCategories>
         <LazyCatalogFilterList
           v-if="filterParams"
@@ -48,7 +41,6 @@ const breadcrumbItems = [{ text: "Главная", href: "/" }, { text: "Кат�
       <div class="g-col-12 g-col-lg-9">
         <CatalogSorting :items="sortingItems" />
         <CatalogProductList :items="products" />
-        <!--        <Pagination :count="3" :current="page" />-->
       </div>
     </div>
   </div>

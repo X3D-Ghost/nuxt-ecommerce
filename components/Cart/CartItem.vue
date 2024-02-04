@@ -57,7 +57,6 @@ const removeItem = () => {
     </td>
     <td class="align-middle">{{ total }}</td>
     <td class="align-middle">
-      <!--      <button class="btn btn-sm btn-outline-danger" @click="removeItem">-->
       <button class="btn btn-sm btn-outline-danger" @click="removeItem">
         <Icon icon="fa-solid fa-xmark" />
       </button>

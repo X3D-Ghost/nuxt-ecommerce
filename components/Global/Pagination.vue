@@ -9,13 +9,6 @@ const props = defineProps({
     default: 0,
   },
 });
-/*const pages = computed(() => {
-  const arr = [];
-  for (let i = 0; i < props.count; i++) {
-    arr[i] = i + 1;
-  }
-  return arr;
-});*/
 const pages = Array(props.count);
 const { query } = useRoute();
 const router = useRoute();

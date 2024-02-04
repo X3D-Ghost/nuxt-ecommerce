@@ -29,9 +29,7 @@ const dec = () => {
 <template>
   <div class="input-group quantity me-3" style="width: 130px">
     <div class="input-group-btn">
-      <button class="btn btn-primary btn-minus" @click="dec">
-        <!--        <Icon icon="fa-solid fa-minus"></Icon>-->
-      </button>
+      <button class="btn btn-primary btn-minus" @click="dec"></button>
     </div>
     <input
       type="text"
@@ -39,9 +37,7 @@ const dec = () => {
       v-model.number="val"
     />
     <div class="input-group-btn">
-      <button class="btn btn-primary btn-plus" @click="inc">
-        <!--        <Icon icon="fa-solid fa-plus"></Icon>-->
-      </button>
+      <button class="btn btn-primary btn-plus" @click="inc"></button>
     </div>
   </div>
 </template>

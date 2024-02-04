@@ -1,9 +1,5 @@
-<script setup lang="ts">
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <ClientOnly>
-    <!--    <FontAwesomeIcon v-bind="$attrs" />-->
-  </ClientOnly>
+  <ClientOnly> </ClientOnly>
 </template>

@@ -46,8 +46,6 @@ function filterChange(param) {
   <div class="filter">
     <slot name="before" :filters="filters" :filterChange="filterChange"></slot>
     <component :is="listComponent" v-bind="listComponentProps">
-      <!--      <template v-for="filter in filters">-->
-      <!--        <slot v-bind="{ filter, filterChange }" @change="filterChange">-->
       <component
         v-for="filter in filters"
         :key="filter.name"
@@ -70,8 +68,6 @@ function filterChange(param) {
           </template>
         </CatalogFilterParam>
       </component>
-      <!--        </slot>-->
-      <!--      </template>-->
     </component>
     <slot name="after" :filters="filters" :filterChange="filterChange"></slot>
   </div>

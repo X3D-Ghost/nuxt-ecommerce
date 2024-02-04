@@ -45,11 +45,8 @@ export const useCatalog = async (options?: optionsType) => {
   const page = route.query.page;
   const perPage = ref(400);
 
-  // async function get() {
   const { data, pending, error, refresh } = await useAsyncData(
-    // "categoryProducts",
     `categoryProducts-${slug}`,
-    // "",
     async () =>
       await $fetch(url, {
         query: {
@@ -64,7 +61,6 @@ export const useCatalog = async (options?: optionsType) => {
           console.log({ context });
         },
         onRequestError({ request, response, options }) {
-          // Handle the response errors
           console.error(response);
         },
         onResponse({ response }) {
@@ -72,16 +68,9 @@ export const useCatalog = async (options?: optionsType) => {
             let { items, ...category } = response?._data;
             products.value = items;
             Object.assign(categoryData, category);
-            // categoryData.id = response._data.id;
-            // categoryData.name = response._data.name;
-            // categoryData.slug = response._data.slug;
-            // categoryData.description = response._data.description;
-            // categoryData.parent = response._data.parent;
-            // categoryData.count = response._data.count;
           }
         },
         onResponseError({ request, response, options }) {
-          // Handle the response errors
           console.error(response);
         },
       }),

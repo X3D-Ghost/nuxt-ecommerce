@@ -1,20 +1,15 @@
-//$enable-gradients: true;
 $enable-shadows: true;
 $enable-dark-mode: true;
 $enable-cssgrid: true;
 
 $primary: #FFD333;
-//$primary: #ff9000;
 $secondary: #F5F5F5;
 $light: #FFFFFF;
 $dark: #3D464D;
-//$dark: #212529;
-//$dark: #000;
 
 $font-family-sans-serif: 'Roboto', sans-serif;
 
 $body-bg: $secondary;
-//$body-bg: $dark;
 
 $body-color: #6C757D;
 
@@ -23,12 +18,6 @@ $headings-color: $dark;
 $enable-responsive-font-sizes: true;
 
 $enable-rounded: false;
-
-//$btn-focus-box-shadow: none;
-//
-//$btn-active-box-shadow: none;
-//
-//$input-btn-focus-box-shadow: none;
 
 $card-border-color: transparent;
 $card-border-width: 0;

@@ -2,11 +2,6 @@
 const props = defineProps({
   items: Array,
 });
-console.log(props.items);
-/*const { data } = await useAsyncData("/categories", () =>
-  queryContent("/categories").findOne()
-);
-const items = data.value.body;*/
 </script>
 
 <template>

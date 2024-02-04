@@ -20,7 +20,6 @@ export const useProductVariants = ({ id, attrs }) => {
   const BACKEND_API_URL = runtimeConfig.public.BACKEND_API_URL;
   const route = useRoute();
   const router = useRouter();
-  const options = [];
   const rawAttrs = ref([]);
   const attributes: Ref<attributeType[]> = ref([]);
   const variations = ref([]);
@@ -66,9 +65,7 @@ export const useProductVariants = ({ id, attrs }) => {
     `${BACKEND_API_URL}/wc/v3/products/${id}/variations`,
     {
       server: false,
-      // lazy: true,
       query: {
-        // slug: encodeURIComponent(slug.value),
         per_page: 100,
       },
       onResponse({ response }) {
@@ -92,8 +89,6 @@ export const useProductVariants = ({ id, attrs }) => {
             const foundProduct = variations.value.find(
               (res) => res.id === currentVariant.value
             );
-            console.log(currentVariant.value);
-            console.log({ foundProduct });
             const foundValue = foundProduct?.attributes.find(
               (el) => el.id === id
             ).option;
@@ -108,24 +103,6 @@ export const useProductVariants = ({ id, attrs }) => {
           }
         });
       },
-      /*onRequestError(
-        context: FetchContext & { error: Error }
-      ): Promise<void> | void {
-        console.log("onRequestError");
-        console.error(context);
-      },*/
-      /*onResponse(
-        context: FetchContext & { response: FetchResponse<R> }
-      ): Promise<void> | void {
-        console.log("onResponse");
-        console.log(context);
-      },*/
-      /*onResponseError(
-        context: FetchContext & { response: FetchResponse<R> }
-      ): Promise<void> | void {
-        console.log("onResponseError");
-        console.error(context);
-      },*/
     }
   );
 

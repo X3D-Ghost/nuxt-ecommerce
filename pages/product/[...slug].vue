@@ -1,14 +1,9 @@
 <script setup lang="ts">
-const route = useRoute();
 const product = await useProduct();
 const productData = product.data.value[0];
 const variant = await useProductVariants(productData.id);
 const variants = ref(null);
 const variableAttributes = ref(variant.attributes);
-
-console.debug(variants.value);
-const count = ref(1);
-const currentTab = ref(1);
 
 const breadcrumbItems = [
   { text: "Главная", href: "/" },
@@ -17,13 +12,6 @@ const breadcrumbItems = [
 </script>
 
 <template>
-  <!-- Shop Detail Start -->
-  <!--  <p v-if="error && error.data">
-    {{ error.data }}
-  </p>-->
-  <!--  <p v-else-if="data">
-    {{ data[0] }}
-  </p>-->
   <div class="container">
     <Breadcrumbs :items="breadcrumbItems" />
     <PageTitle> {{ productData.name }} </PageTitle>
@@ -46,70 +34,10 @@ const breadcrumbItems = [
               :discount="productData.discount"
             />
             <ProductVariants :items="variableAttributes"></ProductVariants>
-            <!--            <p class="mb-4">
-              {{ productData.short_description }}
-            </p>-->
-            <!--            <div class="d-flex mb-3">
-              <strong class="text-dark me-3">Размер:</strong>
-              <template
-                v-for="(size, i) in productData.sizes"
-                :key="size.value"
-              >
-                <InputRadio
-                  v-model="currentSize"
-                  :value="size.value"
-                  :id="`${size.value}-${i}`"
-                  name="size"
-                >
-                  {{ size.title }}
-                </InputRadio>
-              </template>
-            </div>-->
-            <!--            <div class="d-flex mb-4">
-              <strong class="text-dark me-3">Цвет:</strong>
-              <template
-                v-for="(color, i) in productData.colors"
-                :key="color.value"
-              >
-                <InputRadio
-                  v-model="currentColor"
-                  :value="color.value"
-                  :id="`${color.value}-${i}`"
-                  name="size"
-                >
-                  <span :style="{ backgroundColor: color.value }">
-                    {{ color.title || color.value }}
-                  </span>
-                </InputRadio>
-              </template>
-              <div class="btn-group">
-                <a
-                  href="/"
-                  class="btn"
-                  v-for="(color, i) in productData.colors"
-                  :key="color.value"
-                  :style="{ backgroundColor: color.value }"
-                >
-                  {{ color.title || color.value }}
-                </a>
-              </div>
-            </div>-->
             <div class="d-flex align-items-center mb-4 mt-auto pt-2">
-              <!--          <div class="mb-4 pt-2">-->
               <InputCounter :value="1" />
-              <!--              <div class="btn-group">-->
-              <button class="btn btn-primary px-3 me-3">
-                <!--                <Icon
-                  name="fa-solid fa-plus"
-                  icon="fa-solid fa-plus me-1"
-                ></Icon>-->
-                В корзину
-                <!--                <Icon icon="fa-solid fa-shopping-cart ms-1"></Icon>-->
-              </button>
-              <button class="btn btn-outline-primary px-3">
-                <!--                <Icon icon="fa-regular fa-heart"></Icon>-->
-              </button>
-              <!--              </div>-->
+              <button class="btn btn-primary px-3 me-3">В корзину</button>
+              <button class="btn btn-outline-primary px-3"></button>
             </div>
             <ProductQuickBuy />
             <small>Минимальный заказ 1 м.</small>
@@ -140,13 +68,6 @@ const breadcrumbItems = [
             <Tab label="Отзывы" id="tab-desc" data-bs-target="#tab-reviews" />
           </div>
           <TabsContent>
-            <!--            <TabPanel id="tab-description">
-              <h4 class="mb-3">Описание</h4>
-              <div v-html="productData.description"></div>
-            </TabPanel>-->
-            <!--            <TabPanel id="tab-attributes">
-              <ProductAttributes :items="productData.attributes" />
-            </TabPanel>-->
             <TabPanel id="tab-reviews">
               <div class="row">
                 <div class="col-md-6">
@@ -162,13 +83,7 @@ const breadcrumbItems = [
                       <h6>
                         John Doe<small> - <i>01 Jan 2045</i></small>
                       </h6>
-                      <div class="text-primary mb-2">
-                        <!--                        <Icon icon="fa-solid fa-star"></Icon>
-                        <Icon icon="fa-solid fa-star"></Icon>
-                        <Icon icon="fa-solid fa-star"></Icon>
-                        <Icon icon="fa-solid fa-star-half-alt"></Icon>
-                        <Icon icon="fa-regular fa-star"></Icon>-->
-                      </div>
+                      <div class="text-primary mb-2"></div>
                       <p>
                         Diam amet duo labore stet elitr ea clita ipsum, tempor
                         labore accusam ipsum et no at. Kasd diam tempor rebum
@@ -185,13 +100,7 @@ const breadcrumbItems = [
                   >
                   <div class="d-flex my-3">
                     <p class="mb-0 me-2">Your Rating * :</p>
-                    <div class="text-primary">
-                      <!--                      <Icon icon="fa-regular fa-star"></Icon>
-                      <Icon icon="fa-regular fa-star"></Icon>
-                      <Icon icon="fa-regular fa-star"></Icon>
-                      <Icon icon="fa-regular fa-star"></Icon>
-                      <Icon icon="fa-regular fa-star"></Icon>-->
-                    </div>
+                    <div class="text-primary"></div>
                   </div>
                   <form>
                     <div class="form-group">

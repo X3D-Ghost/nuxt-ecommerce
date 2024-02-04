@@ -16,11 +16,9 @@ export const useCategory = async () => {
     },
     onResponse({ response }) {},
   });
-  console.log({ items });
 
   return {
     get,
-    // getAll,
     items,
     pending,
     error,

@@ -15,10 +15,6 @@ const { order, orderby } = sorting;
       <slot>
         <template v-for="(item, i) in items" :key="item.key ?? i">
           <slot name="item" :item="item">
-            <!--            <NuxtLink
-              :to="{ query: { orderby: item.slug, order: item.order } }"
-              >{{ item.name }}</NuxtLink
-            >-->
             <CatalogSortingItem v-bind="item">
               <template #icon>
                 <slot

@@ -12,14 +12,7 @@
 
       <!-- Shop Product Start -->
       <div class="g-col-xxl-10 g-col-lg-9 g-col-md-8">
-        <!--        <div class="grid pb-3">-->
-        <!--          <div class="g-col-12 pb-1">-->
         <CatalogSorting />
-        <!--          </div>-->
-        <!--        <CatalogList />-->
-        <!--          <div class="col-12">-->
-        <!--          </div>-->
-        <!--        </div>-->
       </div>
       <div class="g-col-xxl-10 g-col-lg-9 g-col-md-8">
         <Pagination :count="5" :current="1" />

@@ -18,18 +18,13 @@ const computedItems = computed(() => {
       });
     });
   return tmp_arr;
-  /*activeParams.reduce((item, acc) => {
-    })*/
 });
 
 function remove(param, value) {
   emit("remove", { param, value });
-  console.log({ param, value });
   const queryParam = `f[${param.slug}]`;
-  console.log(route.query[`f[${param.slug}]`]);
   const newQuery = { ...route.query };
   delete newQuery[queryParam];
-  console.log(route.query, newQuery);
   router.push({ query: newQuery, replace: true });
 }
 </script>

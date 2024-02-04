@@ -1,5 +1,4 @@
 <script setup>
-// const colorMode = useColorMode();
 const colorMode = null;
 </script>
 
@@ -32,21 +31,6 @@ const colorMode = null;
               <button class="dropdown-item" type="button">Регистрация</button>
             </div>
           </div>
-          <!--          <div class="btn-group mx-2">
-            <button
-              type="button"
-              class="btn btn-sm btn-light dropdown-toggle"
-              data-bs-toggle="dropdown"
-            >
-              USD
-            </button>
-            <div class="dropdown-menu dropdown-menu-end">
-              <button class="dropdown-item" type="button">RUB</button>
-              <button class="dropdown-item" type="button">EUR</button>
-              <button class="dropdown-item" type="button">GBP</button>
-              <button class="dropdown-item" type="button">CAD</button>
-            </div>
-          </div>-->
           <div class="btn-group">
             <button
               type="button"
@@ -103,12 +87,6 @@ const colorMode = null;
               placeholder="Поиск продукции"
               aria-label="Поиск"
             />
-            <!--            <div class="input-group-append">-->
-            <!--            <span class="input-group-text bg-transparent text-primary">
-              &lt;!&ndash;                <i class="fa fa-search"></i>&ndash;&gt;
-              <Icon icon="fa-soli fa-search" />
-            </span>-->
-            <!--            </div>-->
             <button class="btn">
               <Icon icon="fa-soli fa-search" />
             </button>
@@ -225,7 +203,6 @@ const colorMode = null;
                   data-bs-toggle="dropdown"
                 >
                   Страницы
-                  <!--                  <i class="fa fa-angle-down mt-1"></i>-->
                   <Icon icon="fa-solid fa-angle-down" class="my-1" />
                 </a>
                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">

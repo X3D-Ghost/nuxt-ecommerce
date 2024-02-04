@@ -35,13 +35,7 @@ export const useOrder = () => {
     await $fetch(url, {
       method: requestMethod,
       body: orderData,
-      onRequest(context) {
-        // console.log("create order");
-        console.log({ context });
-        // Promise.resolve();
-      },
       onRequestError({ request, response, options }) {
-        // Handle the response errors
         console.error(response);
         Promise.reject();
       },
@@ -49,7 +43,6 @@ export const useOrder = () => {
         Promise.resolve();
       },
     });
-    // return { data, pending, error, refresh };
   }
 
   return { create };

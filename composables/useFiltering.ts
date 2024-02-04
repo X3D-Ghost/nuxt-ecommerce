@@ -14,10 +14,8 @@ export const useFiltering = async (options?: optionsType) => {
   const activeParams = ref(null);
   provide("activeFilters", activeParams);
   async function get(params?: object) {
-    // watchEffect(() => {
     await useFetch(`${BACKEND_API_URL}/wc/v3/products/filters`, {
       query: {
-        // slug: slug.value,
         ...options?.params,
       },
       lazy: true,
@@ -31,7 +29,6 @@ export const useFiltering = async (options?: optionsType) => {
         activeParams.value = getActiveParams();
       },
     });
-    // });
   }
   get();
   const getFilterParams = () => {
@@ -63,23 +60,17 @@ export const useFiltering = async (options?: optionsType) => {
       delete newQuery[queryParam];
       router.push({ query: newQuery, replace: true });
     }
-    // refresh();
   }
 
   watch(
     () => useRoute().query,
     (newRoute) => {
-      console.log({ newRoute });
-      // get();
       getFilterParams();
       activeParams.value = getActiveParams();
     }
   );
 
   function getActiveParams() {
-    /*console.log(
-      attributes.value.filter((item) => item.value && item.value.length)
-    );*/
     return attributes.value
       .filter((item) => item.value && item.value.length)
       .map((item) => {

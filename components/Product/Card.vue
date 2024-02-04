@@ -15,7 +15,6 @@ const image = props.images && props.images[0];
 <template>
   <div class="card product-item">
     <div class="product-img position-relative overflow-hidden">
-      <!--      <img class="img-fluid w-100" src="/img/product/product-1_1.jpg" alt="" />-->
       <img
         v-if="image"
         class="img-fluid w-100"

@@ -2,11 +2,7 @@
 import { useCartStore } from "~/stores/cart";
 
 const store = useCartStore();
-// `name` and `doubleCount` are reactive refs
-// This will also extract refs for properties added by plugins
-// but skip any action or non reactive (non ref/reactive) property
 const { getTotalPrice, getTotalDiscount } = storeToRefs(store);
-// the increment action can just be destructured
 const { increment, items, changeQuantity, removeProduct } = store;
 
 const shippingCost = ref(500);
@@ -39,9 +35,6 @@ const totalSum = computed(() => shippingCost.value + getTotalPrice.value);
       </table>
     </div>
     <div class="col-lg-4">
-      <!--        <h5 class="section-title position-relative text-uppercase mb-3">
-							<span class="bg-secondary pe-3">Сводка корзины</span>
-						</h5>-->
       <div class="bg-light p-30 mb-5">
         <div class="border-bottom pb-2">
           <div class="d-flex justify-content-between mb-3">
@@ -52,17 +45,7 @@ const totalSum = computed(() => shippingCost.value + getTotalPrice.value);
             <h6>Общий размер скидки</h6>
             <h6>{{ getTotalDiscount }}</h6>
           </div>
-          <!--            <div class="d-flex justify-content-between">
-											<h6 class="fw-medium">Доставка</h6>
-											<h6 class="fw-medium">{{ shippingCost }}</h6>
-										</div>-->
         </div>
-        <!--          <div class="pt-2">
-									<div class="d-flex justify-content-between mt-2">
-										<h5>Всего</h5>
-										<h5>{{ totalSum }}</h5>
-									</div>
-								</div>-->
         <div class="pt-2">
           <form class="mb-3" action="">
             <div class="input-group">

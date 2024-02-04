@@ -18,11 +18,7 @@ const props = defineProps({
           </li>
         </slot>
       </template>
-      <!--      <li class="breadcrumb-item active">
-        <nuxt-link class="text-dark" href="/"> Магазин </nuxt-link>
-      </li>-->
     </ol>
-    <!--          <span class="breadcrumb-item active">Shop List</span>-->
   </nav>
 </template>
 
