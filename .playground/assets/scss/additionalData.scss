@@ -6,9 +6,24 @@
     @content;
   }
 }
-
 @mixin media-breakpoint-down($breakpoint) {
   @media screen and (max-width: 1199px){
+    @content;
+  }
+}
+
+@mixin on-mobile() {
+  @include media-breakpoint-down(md) {
+    @content;
+  }
+}
+@mixin on-desktop() {
+  @include media-breakpoint-up(lg) {
+    @content;
+  }
+}
+@mixin on-tablet() {
+  @include media-breakpoint-down(lg) {
     @content;
   }
 }

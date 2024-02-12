@@ -1,6 +1,6 @@
 export function debounce<T extends (...args: any[]) => any>(
   cb: T,
-  wait: number
+  wait: number,
 ) {
   let h: any;
   const callable = (...args: any) => {

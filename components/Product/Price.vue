@@ -41,8 +41,8 @@ const resultOldPrice = props.priceFormat
     </slot>
     <slot name="discount" v-bind="{ discount }">
       <component
-        v-if="discount"
         :is="discountComponent"
+        v-if="discount"
         class="product-price__discount text-light"
         pill
         variant="danger"

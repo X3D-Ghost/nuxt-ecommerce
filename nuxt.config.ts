@@ -1,10 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { createResolver } from "@nuxt/kit";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
-const { resolve } = createResolver(import.meta.url);
 export default defineNuxtConfig({
   runtimeConfig: {
     // The private keys which are only available within server-side
@@ -32,18 +30,6 @@ export default defineNuxtConfig({
   },
   vite: {
     css: {
-      preprocessorOptions: {
-        test: {
-          minThreads: 0,
-          maxThreads: 1,
-        },
-        scss: {
-          additionalData: `
-          // @use "${resolve("./assets/scss/variables.scss")}" as *;
-          @import "${resolve("./assets/scss/additionalData")}";
-          `,
-        },
-      },
       devSourcemap: true,
     },
   },

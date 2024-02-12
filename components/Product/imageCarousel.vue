@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-const modules = [FreeMode, Navigation, Thumbs];
+const modules = []; // TODO: replace for composable
 const props = defineProps({
   images: {
     type: Array,
+    default: () => [],
   },
   showThumbs: {
     type: Boolean,
@@ -15,6 +15,14 @@ const props = defineProps({
     validator(value: string): boolean {
       return ["horizontal", "vertical"].includes(value);
     },
+  },
+  carouselComponent: {
+    type: [Object, String],
+    default: "div",
+  },
+  itemComponent: {
+    type: [Object, String],
+    default: "div",
   },
 });
 
@@ -30,27 +38,29 @@ const carousel = ref(null);
 <template>
   <div class="grid image-carousel__wrapper gap-0">
     <div v-if="showThumbs" class="g-col-12 g-col-md-2 image-carousel__thumbs">
-      <Swiper
+      <component
+        :is="carouselComponent"
         direction="vertical"
         :modules="modules"
-        watchSlidesProgress
-        :slidesPerView="5"
-        freeMode
+        watch-slides-progress
+        :slides-per-view="5"
+        free-mode
         :pagination="{
           clickable: true,
         }"
         class="image-carousel__thumb-track"
+        slide-active-class="active"
         @swiper="setThumbsSwiper"
-        slideActiveClass="active"
       >
-        <SwiperSlide
+        <component
+          :is="itemComponent"
           v-for="image in images"
           :key="image.src"
           v-slot="{ isActive }"
           class="carousel__item image-carousel__thumb"
           :class="isActive && 'active'"
         >
-          <slot name="thumb" :src="image.src" :isActive="isActive">
+          <slot name="thumb" :src="image.src" :is-active="isActive">
             <img
               class="image-carousel__thumb-image"
               :class="isActive && 'active'"
@@ -58,33 +68,33 @@ const carousel = ref(null);
               alt="Image"
             />
           </slot>
-        </SwiperSlide>
-      </Swiper>
+        </component>
+      </component>
     </div>
     <div class="g-col-12 g-col-md-10 image-carousel">
-      <Swiper
-        :navigation="true"
+      <component
+        :is="carouselComponent"
         ref="carousel"
+        :navigation="true"
         autoplay
         prefix="image-carousel"
         :thumbs="{ swiper: thumbsSwiper }"
         :modules="modules"
         class=""
       >
-        <SwiperSlide v-for="image in images" :key="image.src">
+        <component :is="itemComponent" v-for="image in images" :key="image.src">
           <div class="carousel__item image-carousel__item">
             <slot name="image" :src="image.src">
               <img class="w-100 h-100" :src="image.src" alt="Image" />
             </slot>
           </div>
-        </SwiperSlide>
-      </Swiper>
+        </component>
+      </component>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-@import "bootstrap/scss/mixins";
 .image-carousel {
   &__wrapper {
     display: grid;

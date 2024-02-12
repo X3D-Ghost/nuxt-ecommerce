@@ -1,0 +1,44 @@
+$enable-shadows: true;
+$enable-dark-mode: true;
+$enable-cssgrid: true;
+
+$primary: #FFD333;
+$secondary: #F5F5F5;
+$light: #FFFFFF;
+$dark: #3D464D;
+
+$red: #ff0000;
+
+$font-family-sans-serif: 'Roboto', sans-serif;
+
+$body-bg: $secondary;
+
+$body-color: #6C757D;
+
+$headings-color: $dark;
+
+$enable-responsive-font-sizes: true;
+
+$enable-rounded: false;
+
+$card-border-color: transparent;
+$card-border-width: 0;
+
+$input-placeholder-color: #999999;
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1600px
+);
+
+$container-max-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1140px,
+	xxl: 1600px
+);
