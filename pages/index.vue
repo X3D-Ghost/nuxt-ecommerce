@@ -1,31 +1,17 @@
 <script setup lang="ts"></script>
 
 <template>
-  <!-- Carousel Start -->
   <MainHero />
-  <!-- Carousel End -->
-
-  <!-- Featured Start -->
   <MainFeatured />
-  <!-- Featured End -->
-
-  <!-- Categories Start -->
   <BaseSection title="Каты">
     <template #title>Категории</template>
     <MainCategories />
   </BaseSection>
-  <!-- Categories End -->
-
-  <!-- Products Start -->
   <div class="container-fluid pt-5 pb-3">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
       <span class="bg-secondary pe-3">Featured Products</span>
     </h2>
-    <!--    <CatalogList />-->
   </div>
-  <!-- Products End -->
-
-  <!-- Offer Start -->
   <div class="container-fluid pt-5 pb-3">
     <div class="row px-xl-5">
       <div class="col-md-6">
@@ -50,11 +36,7 @@
       </div>
     </div>
   </div>
-  <!-- Offer End -->
-
-  <!-- Vendor Start -->
   <CommonVendorList />
-  <!-- Vendor End -->
 </template>
 
 <style scoped></style>
