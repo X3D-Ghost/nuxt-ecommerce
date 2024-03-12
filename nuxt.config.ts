@@ -23,8 +23,25 @@ export default defineNuxtConfig({
         pathPrefix: false,
       },
       {
+        path: join(currentDir, "./shared/components"),
+        global: true,
+        pathPrefix: false,
+      },
+      {
         path: join(currentDir, "./components"),
         pathPrefix: true,
+      },
+      {
+        path: join(currentDir, "./features"),
+        global: true,
+      },
+      {
+        path: join(currentDir, "./widgets"),
+        global: true,
+      },
+      {
+        path: join(currentDir, "./entities"),
+        global: true,
       },
     ],
   },
@@ -34,6 +51,9 @@ export default defineNuxtConfig({
     },
   },
   modules: ["@nuxtjs/eslint-module", "@nuxt/image"],
+  imports: {
+    dirs: ["shared/composables", "shared/utils"],
+  },
   devtools: {
     enabled: true,
   },
